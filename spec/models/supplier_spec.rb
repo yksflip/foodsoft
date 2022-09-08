@@ -3,6 +3,13 @@ require_relative '../spec_helper'
 describe Supplier do
   let(:supplier) { create :supplier }
 
+  it 'deletes the supplier and its articles' do
+    supplier = create :supplier, article_count: 3
+    supplier.articles.each{ |a| expect(a).to receive(:mark_as_deleted)}
+    supplier.mark_as_deleted
+    expect(supplier.deleted?).to be(true)
+  end
+
   it 'has a unique name' do
     supplier2 = build :supplier, name: supplier.name
     expect(supplier2).to be_invalid
