@@ -3,9 +3,16 @@ require_relative '../spec_helper'
 describe Supplier do
   let(:supplier) { create :supplier }
 
+  it 'return correct tolerance' do
+    supplier = create :supplier, articles: create_list(:article, 1, unit_quantity: 1)
+    expect(supplier.has_tolerance?).to be false
+    supplier2 = create :supplier, articles: create_list(:article, 1, unit_quantity: 2)
+    expect(supplier2.has_tolerance?).to be true
+  end
+
   it 'deletes the supplier and its articles' do
     supplier = create :supplier, article_count: 3
-    supplier.articles.each{ |a| expect(a).to receive(:mark_as_deleted)}
+    supplier.articles.each{ |a| expect(a).to receive(:mark_as_deleted) }
     supplier.mark_as_deleted
     expect(supplier.deleted?).to be(true)
   end
