@@ -51,6 +51,7 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 
+  config.include SpecTestHelper, type: :controller
   config.include SessionHelper, type: :feature
 
   # Automatically determine spec from directory structure, see:
