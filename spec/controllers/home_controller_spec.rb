@@ -184,16 +184,6 @@ describe HomeController, type: :controller do
         expect(response).to redirect_to(my_profile_path)
         expect(flash[:notice]).to match(/#{I18n.t('home.ordergroup_cancelled', :group => membership.group.name)}/)
       end
-
-      it 'removes user membership' do
-        membership = fin_user.memberships.first
-        get :cancel_membership,
-            params: { foodcoop: FoodsoftConfig[:default_scope],
-                      membership_id: membership.id }
-        expect(response).to have_http_status(:redirect)
-        expect(response).to redirect_to(my_profile_path)
-        expect(flash[:notice]).to match(/#{I18n.t('home.ordergroup_cancelled', :group => membership.group.name)}/)
-      end
     end
   end
 end
