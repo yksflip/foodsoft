@@ -66,7 +66,7 @@ describe HomeController, type: :controller do
     describe 'with simple user' do
       let(:unchanged_attributes) { user.attributes.slice('first_name', 'last_name', 'email') }
       let(:changed_attributes) { attributes_for :user }
-      let(:invalid_attributes) { { email: 'e.mail.com'} }
+      let(:invalid_attributes) { { email: 'e.mail.com' } }
 
       before { login user }
 
