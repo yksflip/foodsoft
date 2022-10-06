@@ -14,6 +14,27 @@ describe Article do
     expect(article.deleted?).to be true
   end
 
+  describe 'convert units' do
+    it 'returns nil when equal' do expect(article.convert_units(article)).to be nil end
+    it 'returns false when invalid unit' do
+      article1 = build :article, supplier: supplier, unit: "invalid"
+      expect(article.convert_units(article1)).to be false
+    end
+    it 'converts from ST to KI' do
+      article1 = build :article, supplier: supplier, unit: "ST"
+      article2 = build :article, supplier: supplier, name: "banana 10-12 St", price: 12.34, unit: "KI"
+      new_price, new_unit_quantity = article1.convert_units(article2)
+      expect(new_unit_quantity).to eq 10
+      expect(new_price).to eq 1.23
+    end
+    it 'converts from g to kg' do
+      article1 = build :article, supplier: supplier, unit: "kg"
+      article2 = build :article, supplier: supplier, unit: "g", price: 0.12, unit_quantity: 1500
+      new_price, new_unit_quantity = article1.convert_units(article2)
+      expect(new_unit_quantity).to eq 1.5
+      expect(new_price).to eq 120
+    end
+  end
   it 'computes the gross price correctly' do
     article.deposit = 0
     article.tax = 12
