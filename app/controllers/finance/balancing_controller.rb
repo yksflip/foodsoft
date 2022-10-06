@@ -22,7 +22,7 @@ class Finance::BalancingController < Finance::BaseController
                 when 'order_number_reverse' then
                   @articles.order('articles.order_number DESC')
                 else
-                  @articles
+                  @articles # TODO: We will never get here
                 end
 
     render layout: false if request.xhr?
@@ -105,6 +105,6 @@ class Finance::BalancingController < Finance::BaseController
     end
     redirect_to finance_order_index_url, notice: t('finance.balancing.close_all_direct_with_invoice.notice', count: count)
   rescue => error
-    redirect_to finance_order_index_url, alert: t('errors.general_msg', msg: error.message)
+    redirect_to finance_order_index_url, alert: t('errors.general_msg', msg: error.message) #TODO: this can't be reached 
   end
 end
