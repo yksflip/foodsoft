@@ -9,6 +9,11 @@ describe Article do
     expect(article2).to be_invalid
   end
 
+  it 'can be deleted' do
+    article.mark_as_deleted()
+    expect(article.deleted?).to be true
+  end
+
   it 'computes the gross price correctly' do
     article.deposit = 0
     article.tax = 12
