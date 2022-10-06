@@ -4,10 +4,6 @@ describe OrderArticle do
   let(:order) { create :order, article_count: 1 }
   let(:oa) { order.order_articles.first }
 
-  it 'foo' do
-    oa.update_article_and_price!()
-  end
-
   it 'is not ordered by default' do
     expect(OrderArticle.ordered.count).to eq 0
   end
