@@ -35,6 +35,12 @@ describe Article do
       expect(new_price).to eq 120
     end
   end
+
+  it 'computes changed article attributes' do # not done yet!
+    article2 = build :article, supplier: supplier, name: "banana"
+    expect(article.unequal_attributes(article2)[:name]).to eq "banana"
+  end
+
   it 'computes the gross price correctly' do
     article.deposit = 0
     article.tax = 12
