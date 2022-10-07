@@ -7,6 +7,7 @@
 default: &defaults
   multi_coop_install: false
   default_scope: 'f'
+  tax_default: 0
 
   name: FC Minimal
 
