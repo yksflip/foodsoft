@@ -5,7 +5,6 @@ require 'spec_helper'
 class DummyAuthController < ApplicationController; end
 
 describe 'Auth concern', type: :controller do
-
   controller DummyAuthController do
     # Defining a dummy action for an anynomous controller which inherits from the described class.
     def authenticate_blank
