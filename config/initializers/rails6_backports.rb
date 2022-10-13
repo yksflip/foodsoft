@@ -1,4 +1,4 @@
-raise "Remove no-longer-needed #{__FILE__}!" if Rails::VERSION::MAJOR >= 6
+#raise "Remove no-longer-needed #{__FILE__}!" if Rails::VERSION::MAJOR >= 6
 
 require "weakref"
 

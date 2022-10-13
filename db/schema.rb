@@ -2,17 +2,17 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your
-# database schema. If you need to create the application database on another
-# system, you should be using db:schema:load, not running all the migrations
-# from scratch. The latter is a flawed and unsustainable approach (the more migrations
-# you'll amass, the slower it'll run and the greater likelihood for issues).
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_05_090257) do
+ActiveRecord::Schema.define(version: 2022_10_13_152302) do
 
-  create_table "active_storage_attachments", id: :integer, force: :cascade do |t|
+  create_table "active_storage_attachments", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", id: :integer, force: :cascade do |t|
+  create_table "active_storage_blobs", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -30,16 +30,23 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.bigint "byte_size", null: false
     t.string "checksum", null: false
     t.datetime "created_at", null: false
+    t.string "service_name", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "article_categories", id: :integer, force: :cascade do |t|
+  create_table "active_storage_variant_records", charset: "utf8mb4", force: :cascade do |t|
+    t.integer "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "article_categories", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "description"
     t.index ["name"], name: "index_article_categories_on_name", unique: true
   end
 
-  create_table "article_prices", id: :integer, force: :cascade do |t|
+  create_table "article_prices", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.integer "article_id", null: false
     t.decimal "price", precision: 8, scale: 2, default: "0.0", null: false
     t.decimal "tax", precision: 8, scale: 2, default: "0.0", null: false
@@ -49,7 +56,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["article_id"], name: "index_article_prices_on_article_id"
   end
 
-  create_table "articles", id: :integer, force: :cascade do |t|
+  create_table "articles", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.integer "supplier_id", default: 0, null: false
     t.integer "article_category_id", default: 0, null: false
@@ -75,14 +82,14 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["type"], name: "index_articles_on_type"
   end
 
-  create_table "assignments", id: :integer, force: :cascade do |t|
+  create_table "assignments", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.integer "user_id", default: 0, null: false
     t.integer "task_id", default: 0, null: false
     t.boolean "accepted", default: false
     t.index ["user_id", "task_id"], name: "index_assignments_on_user_id_and_task_id", unique: true
   end
 
-  create_table "bank_accounts", id: :integer, force: :cascade do |t|
+  create_table "bank_accounts", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "iban"
     t.string "description"
@@ -92,14 +99,14 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.integer "bank_gateway_id"
   end
 
-  create_table "bank_gateways", id: :integer, force: :cascade do |t|
+  create_table "bank_gateways", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "url", null: false
     t.string "authorization"
     t.integer "unattended_user_id"
   end
 
-  create_table "bank_transactions", id: :integer, force: :cascade do |t|
+  create_table "bank_transactions", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.integer "bank_account_id", null: false
     t.string "external_id"
     t.date "date"
@@ -108,15 +115,15 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.string "reference"
     t.text "text"
     t.text "receipt"
-    t.binary "image", limit: 16777215
+    t.binary "image", size: :medium
     t.integer "financial_link_id"
     t.index ["financial_link_id"], name: "index_bank_transactions_on_financial_link_id"
   end
 
-  create_table "documents", id: :integer, force: :cascade do |t|
+  create_table "documents", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.string "name"
     t.string "mime"
-    t.binary "data", limit: 4294967295
+    t.binary "data", size: :long
     t.integer "created_by_user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -124,16 +131,16 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["parent_id"], name: "index_documents_on_parent_id"
   end
 
-  create_table "financial_links", id: :integer, force: :cascade do |t|
+  create_table "financial_links", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.text "note"
   end
 
-  create_table "financial_transaction_classes", id: :integer, force: :cascade do |t|
+  create_table "financial_transaction_classes", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.boolean "ignore_for_account_balance", default: false, null: false
   end
 
-  create_table "financial_transaction_types", id: :integer, force: :cascade do |t|
+  create_table "financial_transaction_types", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.integer "financial_transaction_class_id", null: false
     t.string "name_short"
@@ -141,7 +148,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["name_short"], name: "index_financial_transaction_types_on_name_short"
   end
 
-  create_table "financial_transactions", id: :integer, force: :cascade do |t|
+  create_table "financial_transactions", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.integer "ordergroup_id"
     t.decimal "amount", precision: 8, scale: 2, default: "0.0", null: false
     t.text "note", null: false
@@ -155,7 +162,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["reverts_id"], name: "index_financial_transactions_on_reverts_id", unique: true
   end
 
-  create_table "group_order_article_quantities", id: :integer, force: :cascade do |t|
+  create_table "group_order_article_quantities", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.integer "group_order_article_id", default: 0, null: false
     t.integer "quantity", default: 0
     t.integer "tolerance", default: 0
@@ -163,7 +170,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["group_order_article_id"], name: "index_group_order_article_quantities_on_group_order_article_id"
   end
 
-  create_table "group_order_articles", id: :integer, force: :cascade do |t|
+  create_table "group_order_articles", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.integer "group_order_id", default: 0, null: false
     t.integer "order_article_id", default: 0, null: false
     t.integer "quantity", default: 0, null: false
@@ -176,7 +183,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["order_article_id"], name: "index_group_order_articles_on_order_article_id"
   end
 
-  create_table "group_orders", id: :integer, force: :cascade do |t|
+  create_table "group_orders", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.integer "ordergroup_id"
     t.integer "order_id", default: 0, null: false
     t.decimal "price", precision: 8, scale: 2, default: "0.0", null: false
@@ -189,7 +196,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["ordergroup_id"], name: "index_group_orders_on_ordergroup_id"
   end
 
-  create_table "groups", id: :integer, force: :cascade do |t|
+  create_table "groups", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.string "type", default: "", null: false
     t.string "name", default: "", null: false
     t.string "description"
@@ -214,7 +221,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["name"], name: "index_groups_on_name", unique: true
   end
 
-  create_table "invites", id: :integer, force: :cascade do |t|
+  create_table "invites", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.string "token", default: "", null: false
     t.datetime "expires_at", null: false
     t.integer "group_id", default: 0, null: false
@@ -223,7 +230,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["token"], name: "index_invites_on_token"
   end
 
-  create_table "invoices", id: :integer, force: :cascade do |t|
+  create_table "invoices", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.integer "supplier_id"
     t.string "number"
     t.date "date"
@@ -236,12 +243,12 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.datetime "updated_at"
     t.integer "created_by_user_id"
     t.string "attachment_mime"
-    t.binary "attachment_data", limit: 16777215
+    t.binary "attachment_data", size: :medium
     t.integer "financial_link_id"
     t.index ["supplier_id"], name: "index_invoices_on_supplier_id"
   end
 
-  create_table "links", id: :integer, force: :cascade do |t|
+  create_table "links", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "url", null: false
     t.integer "workgroup_id"
@@ -249,22 +256,22 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.string "authorization"
   end
 
-  create_table "mail_delivery_status", id: :integer, force: :cascade do |t|
+  create_table "mail_delivery_status", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.datetime "created_at"
     t.string "email", null: false
     t.string "message", null: false
     t.string "attachment_mime"
-    t.binary "attachment_data", limit: 4294967295
+    t.binary "attachment_data", size: :long
     t.index ["email"], name: "index_mail_delivery_status_on_email"
   end
 
-  create_table "memberships", id: :integer, force: :cascade do |t|
+  create_table "memberships", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.integer "group_id", default: 0, null: false
     t.integer "user_id", default: 0, null: false
     t.index ["user_id", "group_id"], name: "index_memberships_on_user_id_and_group_id", unique: true
   end
 
-  create_table "message_recipients", id: :integer, force: :cascade do |t|
+  create_table "message_recipients", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.integer "message_id", null: false
     t.integer "user_id", null: false
     t.integer "email_state", default: 0, null: false
@@ -273,7 +280,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["user_id", "read_at"], name: "index_message_recipients_on_user_id_and_read_at"
   end
 
-  create_table "messages", id: :integer, force: :cascade do |t|
+  create_table "messages", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.integer "sender_id"
     t.string "subject", null: false
     t.text "body"
@@ -282,10 +289,10 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.integer "reply_to"
     t.integer "group_id"
     t.string "salt"
-    t.binary "received_email", limit: 16777215
+    t.binary "received_email", size: :medium
   end
 
-  create_table "oauth_access_grants", id: :integer, force: :cascade do |t|
+  create_table "oauth_access_grants", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.integer "resource_owner_id", null: false
     t.integer "application_id", null: false
     t.string "token", null: false
@@ -297,7 +304,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["token"], name: "index_oauth_access_grants_on_token", unique: true
   end
 
-  create_table "oauth_access_tokens", id: :integer, force: :cascade do |t|
+  create_table "oauth_access_tokens", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.integer "resource_owner_id"
     t.integer "application_id"
     t.string "token", null: false
@@ -311,7 +318,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["token"], name: "index_oauth_access_tokens_on_token", unique: true
   end
 
-  create_table "oauth_applications", id: :integer, force: :cascade do |t|
+  create_table "oauth_applications", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "uid", null: false
     t.string "secret", null: false
@@ -323,7 +330,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true
   end
 
-  create_table "order_articles", id: :integer, force: :cascade do |t|
+  create_table "order_articles", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.integer "order_id", default: 0, null: false
     t.integer "article_id", default: 0, null: false
     t.integer "quantity", default: 0, null: false
@@ -337,7 +344,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["order_id"], name: "index_order_articles_on_order_id"
   end
 
-  create_table "order_comments", id: :integer, force: :cascade do |t|
+  create_table "order_comments", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.integer "order_id"
     t.integer "user_id"
     t.text "text"
@@ -345,7 +352,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["order_id"], name: "index_order_comments_on_order_id"
   end
 
-  create_table "orders", id: :integer, force: :cascade do |t|
+  create_table "orders", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.integer "supplier_id"
     t.text "note"
     t.datetime "starts"
@@ -364,7 +371,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["state"], name: "index_orders_on_state"
   end
 
-  create_table "page_versions", id: :integer, force: :cascade do |t|
+  create_table "page_versions", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.integer "page_id"
     t.integer "lock_version"
     t.text "body"
@@ -375,7 +382,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["page_id"], name: "index_page_versions_on_page_id"
   end
 
-  create_table "pages", id: :integer, force: :cascade do |t|
+  create_table "pages", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.string "title"
     t.text "body"
     t.string "permalink"
@@ -389,20 +396,20 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["title"], name: "index_pages_on_title"
   end
 
-  create_table "periodic_task_groups", id: :integer, force: :cascade do |t|
+  create_table "periodic_task_groups", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.date "next_task_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "poll_choices", id: :integer, force: :cascade do |t|
+  create_table "poll_choices", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.integer "poll_vote_id", null: false
     t.integer "choice", null: false
     t.integer "value", null: false
     t.index ["poll_vote_id", "choice"], name: "index_poll_choices_on_poll_vote_id_and_choice", unique: true
   end
 
-  create_table "poll_votes", id: :integer, force: :cascade do |t|
+  create_table "poll_votes", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.integer "poll_id", null: false
     t.integer "user_id", null: false
     t.integer "ordergroup_id"
@@ -412,7 +419,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["poll_id", "user_id", "ordergroup_id"], name: "index_poll_votes_on_poll_id_and_user_id_and_ordergroup_id", unique: true
   end
 
-  create_table "polls", id: :integer, force: :cascade do |t|
+  create_table "polls", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.integer "created_by_user_id", null: false
     t.string "name", null: false
     t.text "description"
@@ -432,7 +439,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["final_choice"], name: "index_polls_on_final_choice"
   end
 
-  create_table "printer_job_updates", id: :integer, force: :cascade do |t|
+  create_table "printer_job_updates", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.integer "printer_job_id", null: false
     t.datetime "created_at", null: false
     t.string "state", null: false
@@ -440,7 +447,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["printer_job_id", "created_at"], name: "index_printer_job_updates_on_printer_job_id_and_created_at"
   end
 
-  create_table "printer_jobs", id: :integer, force: :cascade do |t|
+  create_table "printer_jobs", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.integer "order_id"
     t.string "document", null: false
     t.integer "created_by_user_id", null: false
@@ -449,7 +456,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["finished_at"], name: "index_printer_jobs_on_finished_at"
   end
 
-  create_table "settings", id: :integer, force: :cascade do |t|
+  create_table "settings", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.string "var", null: false
     t.text "value"
     t.integer "thing_id"
@@ -459,7 +466,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["thing_type", "thing_id", "var"], name: "index_settings_on_thing_type_and_thing_id_and_var", unique: true
   end
 
-  create_table "stock_changes", id: :integer, force: :cascade do |t|
+  create_table "stock_changes", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.integer "stock_event_id"
     t.integer "order_id"
     t.integer "stock_article_id"
@@ -469,7 +476,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["stock_event_id"], name: "index_stock_changes_on_stock_event_id"
   end
 
-  create_table "stock_events", id: :integer, force: :cascade do |t|
+  create_table "stock_events", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.integer "supplier_id"
     t.date "date"
     t.datetime "created_at"
@@ -479,14 +486,14 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["supplier_id"], name: "index_stock_events_on_supplier_id"
   end
 
-  create_table "supplier_categories", id: :integer, force: :cascade do |t|
+  create_table "supplier_categories", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "description"
     t.integer "financial_transaction_class_id"
     t.integer "bank_account_id"
   end
 
-  create_table "suppliers", id: :integer, force: :cascade do |t|
+  create_table "suppliers", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "address", default: "", null: false
     t.string "phone", default: "", null: false
@@ -508,7 +515,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["name"], name: "index_suppliers_on_name", unique: true
   end
 
-  create_table "tasks", id: :integer, force: :cascade do |t|
+  create_table "tasks", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.text "description"
     t.date "due_date"
@@ -525,7 +532,7 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["workgroup_id"], name: "index_tasks_on_workgroup_id"
   end
 
-  create_table "users", id: :integer, force: :cascade do |t|
+  create_table "users", id: :integer, charset: "utf8mb4", force: :cascade do |t|
     t.string "nick"
     t.string "password_hash", default: "", null: false
     t.string "password_salt", default: "", null: false
@@ -544,4 +551,5 @@ ActiveRecord::Schema.define(version: 2021_02_05_090257) do
     t.index ["nick"], name: "index_users_on_nick", unique: true
   end
 
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
 end

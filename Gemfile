@@ -1,7 +1,7 @@
 # A sample Gemfile
 source "https://rubygems.org"
 
-gem "rails", '~> 5.2'
+gem "rails", '~> 6.1'
 
 gem 'sass-rails'
 gem 'less-rails'
@@ -115,8 +115,5 @@ group :test do
   gem 'simplecov', require: false
   gem 'simplecov-lcov', require: false
   # api
-  gem 'apivore', require: false
-  gem 'rswag'
-  gem 'rswag-specs'
   gem 'hashie', '~> 3.4.6', require: false # https://github.com/westfieldlabs/apivore/issues/114
 end

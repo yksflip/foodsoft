@@ -63,6 +63,11 @@ module Foodsoft
     # Load legacy scripts from vendor
     config.assets.precompile += ['vendor/assets/javascripts/*.js']
 
+    config.active_record.yaml_column_permitted_classes = [Symbol, BigDecimal]
+
+    #Ex:- :default =>''
+
+
     # CORS for API
     config.middleware.insert_before 0, Rack::Cors do
       allow do
