@@ -5,6 +5,7 @@ FactoryBot.define do
     name { Faker::Company.name.truncate(30) }
     phone { Faker::PhoneNumber.phone_number }
     address { Faker::Address.street_address }
+    email { Faker::Internet.email }
 
     transient do
       article_count { 0 }

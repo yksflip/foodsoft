@@ -1,0 +1,42 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+  - name: build and test
+    image: circleci/ruby:2.6.9-bullseye-node-browsers-legacy
+    commands:
+      - sudo apt install --no-install-recommends -y libmagic-dev
+      - sudo -E bundle install --path /bundle --without production,development
+      - sudo -E bundle exec rake foodsoft:setup:stock_config || true
+      - sudo -E bundle exec rake db:schema:load
+      - sudo -E bundle exec rake rspec-rerun:spec
+
+    volumes:
+      - name: gem-cache
+        path: /bundle
+      - name: tmp
+        path: /drone/src/tmp
+    environment:
+      RAILS_LOG_TO_STDOUT: true
+      RAILS_ENV: test
+      COVERAGE: lcov
+      DATABASE_URL:  mysql2://user:password@mariadb/test?encoding=utf8mb4
+      DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: true
+      PARALLEL_TEST_PROCESSORS: 15
+
+services:
+  - name: mariadb
+    image: mariadb
+    environment:
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: test
+      MYSQL_ROOT_PASSWORD: password
+
+volumes:
+  - name: gem-cache
+    host:
+      path: /tmp/cache
+  - name: tmp
+    temp: {}

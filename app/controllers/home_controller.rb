@@ -63,8 +63,9 @@ class HomeController < ApplicationController
 
   # cancel personal memberships direct from the myProfile-page
   def cancel_membership
+    # TODO: membership_id not used anymore?
     if params[:membership_id]
-      membership = @current_user.memberships.find!(params[:membership_id])
+      membership = @current_user.memberships.find(params[:membership_id])
     else
       membership = @current_user.memberships.find_by_group_id!(params[:group_id])
     end
