@@ -132,7 +132,7 @@ describe HomeController, type: :controller do
 
       describe 'assigns sortings' do
         let(:fin_trans1) { create :financial_transaction, user: og_user, ordergroup: og_user.ordergroup, note: 'A', amount: 100 }
-        let(:fin_trans2) { create :financial_transaction, user: og_user, ordergroup: og_user.ordergroup, note: 'B', amount: 200 }
+        let(:fin_trans2) { create :financial_transaction, user: og_user, ordergroup: og_user.ordergroup, note: 'B', amount: 200, created_on: Time.now + 1.minute }
 
         before do
           fin_trans1
