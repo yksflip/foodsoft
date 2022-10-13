@@ -12,7 +12,7 @@ describe ArticlesController, type: :controller do
 
   let(:supplier) { create :supplier, articles: [articleA, articleB] }
   let(:order) { create :order }
-  let(:order_article) { create :order_article, order: order, article: articleC }
+
 
   before { login user }
 
@@ -68,7 +68,7 @@ describe ArticlesController, type: :controller do
       expect(response).to have_http_status(:success)
     end
 
-    it 'fails to create a new article an renders #new' do
+    it 'fails to create a new article and renders #new' do
       get :create, params: { foodcoop: FoodsoftConfig[:default_scope], supplier_id: supplier.id, article: { id: nil } }, xhr: true
       expect(response).to have_http_status(:success)
       expect(response).to render_template('articles/new')
@@ -114,6 +114,7 @@ describe ArticlesController, type: :controller do
   end
 
   describe "#update_selected" do
+    let(:order_article) { create :order_article, order: order, article: articleC }
     before do
       order_article
     end
@@ -157,11 +158,11 @@ describe ArticlesController, type: :controller do
   end
 
   describe "#parse_upload" do
-    let(:file) { fixture_file_upload(Rails.root.join('spec/fixtures/files/upload_test.csv')) }
+    # let(:file) { fixture_file_upload(Rails.root.join('spec/fixtures/files/upload_test.csv')) }
 
-    before do
-      file
-    end
+    # before do
+    #   file
+    # end
     # TODO: Cannot use Rack attributes in controller??
     # #<NoMethodError: undefined method `original_filename' for
     # "#<Rack::Test::UploadedFile:0x00005575cef1d238>":String
@@ -182,6 +183,7 @@ describe ArticlesController, type: :controller do
   end
 
   describe "#destroy" do
+    let(:order_article) { create :order_article, order: order, article: articleC }
     before do
       order_article
     end
@@ -202,6 +204,7 @@ describe ArticlesController, type: :controller do
   end
 
   describe "#update_synchronized" do
+    let(:order_article) { create :order_article, order: order, article: articleC }
     before do
       order_article
       articleA
@@ -290,10 +293,33 @@ describe ArticlesController, type: :controller do
     let(:supplier_with_shared) { create :supplier, articles: [articleS], shared_supplier: shared_supplier }
 
     it 'renders view with articles' do
-      get :shared, params: { foodcoop: FoodsoftConfig[:default_scope], supplier_id: supplier_with_shared.id, q: { name_cont_all: "shared" } }, xhr: true
+      get :shared, params: { foodcoop: FoodsoftConfig[:default_scope], supplier_id: supplier_with_shared.id, name_cont_all_joined: "shared" }, xhr: true
       expect(assigns(:supplier).shared_supplier.shared_articles.any?).to be_truthy
       expect(assigns(:articles).any?).to be_truthy
       expect(response).to have_http_status(:success)
+    end
+  end
+
+  describe "#import" do
+    let(:shared_supplier) { create :shared_supplier, shared_articles: [shared_article] }
+    let(:shared_article) { create :shared_article, name: "shared" }
+
+    before do
+      shared_article
+      article_categoryA
+    end
+
+    it 'fills form with article details' do
+      get :import, params: { foodcoop: FoodsoftConfig[:default_scope], article_category_id: article_categoryB.id, direct: "true", supplier_id: supplier.id, shared_article_id: shared_article.id }, xhr: true
+      expect(assigns(:article).nil?).to be_falsey
+      expect(response).to have_http_status(:success)
+      expect(response).to render_template(:create)
+    end
+    it 'does redirect to :new if param :direct not set' do
+      get :import, params: { foodcoop: FoodsoftConfig[:default_scope], article_category_id: article_categoryB.id, supplier_id: supplier.id, shared_article_id: shared_article.id }, xhr: true
+      expect(assigns(:article).nil?).to be_falsey
+      expect(response).to have_http_status(:success)
+      expect(response).to render_template(:new)
     end
   end
 end
