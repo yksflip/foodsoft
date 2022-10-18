@@ -1,4 +1,4 @@
-module Concerns::SendOrderPdf
+module SendOrderPdf
   extend ActiveSupport::Concern
 
   protected

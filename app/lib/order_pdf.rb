@@ -1,4 +1,4 @@
-class OrderPdf < RenderPDF
+class OrderPdf < RenderPdf
   attr_reader :order
 
   def initialize(order, options = {})

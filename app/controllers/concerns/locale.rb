@@ -1,4 +1,4 @@
-module Concerns::Locale
+module Locale
   extend ActiveSupport::Concern
 
   included do

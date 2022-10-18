@@ -2,7 +2,7 @@
 #
 # Split off from main +ApplicationController+ to allow e.g.
 # Doorkeeper to use it too.
-module Concerns::Auth
+module Auth
   extend ActiveSupport::Concern
 
   protected

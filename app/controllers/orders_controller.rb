@@ -2,7 +2,7 @@
 # Controller for managing orders, i.e. all actions that require the "orders" role.
 # Normal ordering actions of members of order groups is handled by the OrderingController.
 class OrdersController < ApplicationController
-  include Concerns::SendOrderPdf
+  include SendOrderPdf
 
   before_action :authenticate_pickups_or_orders
   before_action :authenticate_orders, except: [:receive, :receive_on_order_article_create, :receive_on_order_article_update, :show]

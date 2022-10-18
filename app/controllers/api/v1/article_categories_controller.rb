@@ -1,5 +1,5 @@
 class Api::V1::ArticleCategoriesController < Api::V1::BaseController
-  include Concerns::CollectionScope
+  include CollectionScope
 
   def index
     render json: search_scope

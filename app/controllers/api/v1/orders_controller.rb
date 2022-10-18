@@ -1,5 +1,5 @@
 class Api::V1::OrdersController < Api::V1::BaseController
-  include Concerns::CollectionScope
+  include CollectionScope
 
   before_action -> { doorkeeper_authorize! 'orders:read', 'orders:write' }
 

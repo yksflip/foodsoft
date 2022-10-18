@@ -16,7 +16,7 @@ class RemoveTableArticlePrices < ActiveRecord::Migration[4.2]
     puts "now copy values of article_prices into new articles-columns..."
     Article.find(:all).each do |article|
       price = article.current_price
-      article.update_attributes!(:clear_price => price.clear_price,
+      article.update!(:clear_price => price.clear_price,
                                  :gross_price => price.gross_price,
                                  :tax => price.tax,
                                  :refund => price.refund,

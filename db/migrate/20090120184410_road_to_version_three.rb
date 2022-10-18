@@ -47,7 +47,7 @@ class RoadToVersionThree < ActiveRecord::Migration[4.2]
     Ordergroup.all.each do |ordergroup|
       contact = ordergroup.users.first
       if contact
-        ordergroup.update_attributes :contact_person => contact.name,
+        ordergroup.update :contact_person => contact.name,
                                      :contact_phone => contact.phone, :contact_address => contact.address
       end
     end

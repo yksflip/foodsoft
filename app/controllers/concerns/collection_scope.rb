@@ -1,10 +1,10 @@
-module Concerns::CollectionScope
+module CollectionScope
   extend ActiveSupport::Concern
 
   private
 
   def scope
-    raise NotImplementedError, 'Please override #scope when you use Concerns::CollectionScope'
+    raise NotImplementedError, 'Please override #scope when you use CollectionScope'
   end
 
   def default_per_page

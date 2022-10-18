@@ -9,7 +9,7 @@ Bundler.require(*Rails.groups)
 module Foodsoft
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.0
+    config.load_defaults 6.1
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
@@ -64,6 +64,8 @@ module Foodsoft
     config.assets.precompile += ['vendor/assets/javascripts/*.js']
 
     config.active_record.yaml_column_permitted_classes = [Symbol, BigDecimal]
+
+    config.autoloader = :zeitwerk
 
     #Ex:- :default =>''
 

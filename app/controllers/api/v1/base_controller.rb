@@ -1,5 +1,5 @@
 class Api::V1::BaseController < ApplicationController
-  include Concerns::AuthApi
+  include AuthApi
 
   protect_from_forgery with: :null_session
 

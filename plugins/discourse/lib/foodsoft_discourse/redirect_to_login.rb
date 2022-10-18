@@ -18,5 +18,5 @@ end
 
 # modify existing helper
 ActiveSupport.on_load(:after_initialize) do
-  Concerns::Auth.send :include, FoodsoftDiscourse::RedirectToLogin
+  Auth.send :include, FoodsoftDiscourse::RedirectToLogin
 end

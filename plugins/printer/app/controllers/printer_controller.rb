@@ -1,5 +1,5 @@
 class PrinterController < ApplicationController
-  include Concerns::SendOrderPdf
+  include SendOrderPdf
   include Tubesock::Hijack
 
   skip_before_action :authenticate

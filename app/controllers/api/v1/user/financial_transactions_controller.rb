@@ -1,5 +1,5 @@
 class Api::V1::User::FinancialTransactionsController < Api::V1::BaseController
-  include Concerns::CollectionScope
+  include CollectionScope
 
   before_action -> { doorkeeper_authorize! 'finance:user' }
   before_action :require_ordergroup

@@ -2,7 +2,7 @@
 #
 # Includes a +before_action+ for selecting foodcoop from url.
 #
-module Concerns::FoodcoopScope
+module FoodcoopScope
   extend ActiveSupport::Concern
 
   included do

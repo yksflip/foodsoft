@@ -1,5 +1,5 @@
 class PrinterJobsController < ApplicationController
-  include Concerns::SendOrderPdf
+  include SendOrderPdf
 
   before_action -> { require_plugin_enabled FoodsoftPrinter }
 
