@@ -1,7 +1,7 @@
 # A sample Gemfile
 source "https://rubygems.org"
 
-gem "rails", '~> 6.1'
+gem "rails", '~> 7.0'
 
 gem 'sass-rails'
 gem 'less-rails'
@@ -38,7 +38,7 @@ gem 'simple-navigation-bootstrap'
 gem 'sprockets', '< 4'
 gem 'ransack'
 gem 'acts_as_tree'
-gem 'rails-settings-cached', '= 0.4.3' # caching breaks tests until Rails 5 https://github.com/huacnlee/rails-settings-cached/issues/73
+gem 'rails-settings-cached'
 gem 'resque'
 gem 'puma', '~> 5.0' #waiting for stable puma 6 release. does break with capybara
 gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
