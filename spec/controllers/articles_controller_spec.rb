@@ -6,17 +6,24 @@ describe ArticlesController, type: :controller do
   let(:user) { create :user, :role_article_meta }
   let(:article_categoryA) { create :article_category, name: "AAAA" }
   let(:article_categoryB) { create :article_category, name: "BBBB" }
-  let(:articleA) { create :article, name: 'AAAA', note: "AAAA", unit: '250 g', article_category: article_categoryA, availability: false }
-  let(:articleB) { create :article, name: 'BBBB', note: "BBBB", unit: '500 g', article_category: article_categoryB, availability: true }
+  let(:supplier) { create :supplier}
+  let(:articleA) { create :article, name: 'AAAA', note: "AAAA", unit: '250 g', article_category: article_categoryA, availability: false, supplier_id: supplier.id }
+
+  let(:articleB) { create :article, name: 'BBBB', note: "BBBB", unit: '500 g', article_category: article_categoryB, availability: true, supplier_id: supplier.id }
   let(:articleC) { create :article, name: 'CCCC', note: "CCCC", unit: '500 g', article_category: article_categoryB, availability: true }
 
-  let(:supplier) { create :supplier, articles: [articleA, articleB] }
   let(:order) { create :order }
 
 
   before { login user }
 
   describe 'GET index' do
+    before do
+      supplier
+      articleA
+      articleB
+      supplier.reload
+    end
     it 'assigns sorting on articles' do
       sortings = [
         ['name', [articleA, articleB]],
@@ -290,7 +297,7 @@ describe ArticlesController, type: :controller do
     let(:shared_article) { create :shared_article, name: "shared" }
     let(:articleS) { create :article, name: 'SSSS', note: "AAAA", unit: '250 g', article_category: article_categoryA, availability: false }
 
-    let(:supplier_with_shared) { create :supplier, articles: [articleS], shared_supplier: shared_supplier }
+    let(:supplier_with_shared) { create :supplier, shared_supplier: shared_supplier }
 
     it 'renders view with articles' do
       get :shared, params: { foodcoop: FoodsoftConfig[:default_scope], supplier_id: supplier_with_shared.id, name_cont_all_joined: "shared" }, xhr: true
