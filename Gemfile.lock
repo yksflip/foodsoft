@@ -1,4 +1,15 @@
 GIT
+  remote: https://github.com/gregschmit/recurring_select
+  revision: 29febc4c4abdd6c30636c33a7d2daecb09973ecf
+  specs:
+    recurring_select (3.0.0)
+      coffee-rails (>= 3.1)
+      ice_cube (>= 0.11)
+      jquery-rails (>= 3.0)
+      rails (>= 5.2)
+      sass-rails (>= 4.0)
+
+GIT
   remote: https://github.com/technoweenie/acts_as_versioned.git
   revision: 63b1fc8529d028fae632fe80ec0cb25df56cd76b
   specs:
@@ -154,7 +165,6 @@ GEM
     bullet (7.0.3)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11)
-    callsite (0.0.11)
     capybara (3.37.1)
       addressable
       matrix
@@ -216,7 +226,7 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
-    faker (2.23.0)
+    faker (3.0.0)
       i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
     gaffe (1.2.0)
@@ -272,10 +282,10 @@ GEM
     kaminari-core (1.2.2)
     less (2.6.0)
       commonjs (~> 0.2.7)
-    less-rails (5.0.0)
-      actionpack (>= 5.0)
+    less-rails (4.0.0)
+      actionpack (>= 4)
       less (~> 2.6.0)
-      sprockets (~> 3.0)
+      sprockets (>= 2)
     libv8 (3.16.14.19-x86_64-linux)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -297,10 +307,6 @@ GEM
       thin
     marcel (1.0.2)
     matrix (0.4.2)
-    meta_request (0.3.0)
-      callsite
-      rack-contrib
-      railties
     method_source (1.0.0)
     midi-smtp-server (3.0.3)
     mime-types (3.4.1)
@@ -349,8 +355,6 @@ GEM
       nio4r (~> 2.0)
     racc (1.6.0)
     rack (2.2.4)
-    rack-contrib (2.3.0)
-      rack (~> 2.0)
     rack-cors (1.1.1)
       rack (>= 2.0.0)
     rack-protection (3.0.2)
@@ -385,8 +389,8 @@ GEM
     rails-i18n (7.0.5)
       i18n (>= 0.7, < 2)
       railties (>= 6.0.0, < 8)
-    rails-settings-cached (2.8.2)
-      rails (>= 5.0.0)
+    rails-settings-cached (0.4.3)
+      rails (>= 4.2.0)
     rails_tokeninput (1.7.0)
       railties (>= 3.1.0)
     railties (7.0.4)
@@ -405,15 +409,9 @@ GEM
     rb-fsevent (0.11.2)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    recurring_select (3.0.0)
-      coffee-rails (>= 3.1)
-      ice_cube (>= 0.11)
-      jquery-rails (>= 3.0)
-      rails (>= 5.2)
-      sass-rails (>= 4.0)
     redis (5.0.5)
       redis-client (>= 0.9.0)
-    redis-client (0.10.0)
+    redis-client (0.11.0)
       connection_pool
     redis-namespace (1.9.0)
       redis (>= 4)
@@ -458,7 +456,7 @@ GEM
     rspec-rerun (1.1.0)
       rspec (~> 3.0)
     rspec-support (3.12.0)
-    rubocop (1.37.1)
+    rubocop (1.38.0)
       json (~> 2.3)
       parallel (~> 1.10)
       parser (>= 3.1.2.1)
@@ -542,11 +540,11 @@ GEM
     tilt (2.0.11)
     timeout (0.3.0)
     ttfunk (1.7.0)
-    twitter-bootstrap-rails (2.2.8)
-      actionpack (>= 3.1)
-      execjs
-      rails (>= 3.1)
-      railties (>= 3.1)
+    twitter-bootstrap-rails (5.0.0)
+      actionpack (>= 5.0, < 8.0)
+      execjs (~> 2.7)
+      less-rails (>= 3.0, < 5.0)
+      railties (>= 5.0, < 8.0)
     twitter-text (1.14.7)
       unf (~> 0.1.0)
     tzinfo (2.0.5)
@@ -576,7 +574,7 @@ GEM
       twitter-text
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.6.1)
+    zeitwerk (2.6.4)
 
 PLATFORMS
   x86_64-linux
@@ -621,7 +619,6 @@ DEPENDENCIES
   less-rails
   listen
   mailcatcher
-  meta_request
   midi-smtp-server
   mime-types
   mysql2
@@ -635,10 +632,10 @@ DEPENDENCIES
   rails-assets-listjs (= 0.2.0.beta.4)
   rails-controller-testing
   rails-i18n
-  rails-settings-cached
+  rails-settings-cached (= 0.4.3)
   rails_tokeninput
   ransack
-  recurring_select
+  recurring_select!
   resque
   roo
   roo-xls
@@ -651,9 +648,9 @@ DEPENDENCIES
   ruby-filemagic
   ruby-prof
   ruby-units
-  sass-rails
+  sassc-rails
   select2-rails
-  simple-navigation (~> 3.14.0)
+  simple-navigation
   simple-navigation-bootstrap
   simple_form
   simplecov
@@ -663,8 +660,8 @@ DEPENDENCIES
   sqlite3 (~> 1.3.6)
   table_print
   therubyracer
-  twitter-bootstrap-rails (~> 2.2.8)
-  uglifier (>= 1.0.3)
+  twitter-bootstrap-rails (~> 5.0)
+  uglifier
   web-console
   whenever
 

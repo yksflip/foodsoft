@@ -3,9 +3,9 @@ source "https://rubygems.org"
 
 gem "rails", '~> 7.0'
 
-gem 'sass-rails'
+gem 'sassc-rails'
 gem 'less-rails'
-gem 'uglifier', '>= 1.0.3'
+gem 'uglifier'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 
@@ -32,20 +32,21 @@ gem 'doorkeeper'
 gem 'doorkeeper-i18n'
 gem 'rack-cors', require: 'rack/cors'
 gem 'active_model_serializers', '~> 0.10.0'
-gem 'twitter-bootstrap-rails', '~> 2.2.8'
-gem 'simple-navigation', '~> 3.14.0' # 3.x for simple_navigation_bootstrap
+gem 'twitter-bootstrap-rails', '~> 5.0'
+gem 'simple-navigation'
 gem 'simple-navigation-bootstrap'
 gem 'sprockets', '< 4'
 gem 'ransack'
 gem 'acts_as_tree'
-gem 'rails-settings-cached'
+gem 'rails-settings-cached', '= 0.4.3'
 gem 'resque'
 gem 'puma', '~> 5.0' #waiting for stable puma 6 release. does break with capybara
 gem 'whenever', require: false # For defining cronjobs, see config/schedule.rb
 gem 'ruby-units'
 gem 'attribute_normalizer'
 gem 'ice_cube'
-gem 'recurring_select'
+# At timeof development necessary fix for config_helper.rb form builder was not in rubygems so we pull from github, see: https://github.com/gregschmit/recurring_select/pull/152
+gem 'recurring_select', git: 'https://github.com/gregschmit/recurring_select'
 gem 'roo'
 gem 'roo-xls'
 gem 'spreadsheet'
@@ -80,7 +81,9 @@ group :development do
   gem 'binding_of_caller'
   # gem "rails-i18n-debug"
   # chrome debugging extension https://github.com/dejan/rails_panel
-  gem 'meta_request'
+  
+  # TODO: disabled due to https://github.com/rails/rails/issues/40781
+  # gem 'meta_request'
 
   # Get infos when not using proper eager loading
   gem 'bullet'
