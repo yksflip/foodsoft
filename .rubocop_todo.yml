@@ -266,7 +266,7 @@ Metrics/AbcSize:
 # Configuration parameters: CountComments, CountAsOne, ExcludedMethods, AllowedMethods, AllowedPatterns, IgnoredMethods, inherit_mode.
 # AllowedMethods: refine
 Metrics/BlockLength:
-  Max: 210
+  Max: 212
 
 # Offense count: 6
 # Configuration parameters: CountBlocks.
@@ -451,6 +451,24 @@ RSpec/DescribedClass:
     - "spec/models/ordergroup_spec.rb"
     - "spec/models/user_spec.rb"
 
+# Offense count: 15
+# This cop supports unsafe autocorrection (--autocorrect-all).
+RSpec/EmptyExampleGroup:
+  Exclude:
+    - 'spec/requests/api/article_categories_spec.rb'
+    - 'spec/requests/api/configs_spec.rb'
+    - 'spec/requests/api/financial_transaction_classes_spec.rb'
+    - 'spec/requests/api/financial_transaction_types_spec.rb'
+    - 'spec/requests/api/financial_transactions_spec.rb'
+    - 'spec/requests/api/navigations_spec.rb'
+    - 'spec/requests/api/order_articles_spec.rb'
+    - 'spec/requests/api/orders_spec.rb'
+    - 'spec/requests/api/user/financial_transactions_spec.rb'
+    - 'spec/requests/api/user/group_order_articles_spec.rb'
+    - 'spec/requests/api/user/users_spec.rb'
+
+
+
 # Offense count: 65
 # Configuration parameters: CountAsOne.
 RSpec/ExampleLength:
@@ -580,6 +598,14 @@ RSpec/ScatteredSetup:
     - "spec/api/v1/user/ordergroup_spec.rb"
     - "spec/integration/balancing_spec.rb"
     - "spec/integration/login_spec.rb"
+
+# Offense count: 4
+# Configuration parameters: AllowedPatterns, IgnoredPatterns.
+# SupportedStyles: snake_case, camelCase
+RSpec/VariableName:
+  EnforcedStyle: snake_case
+  AllowedPatterns:
+     - ^Authorization$
 
 # Offense count: 1
 # Configuration parameters: IgnoreNameless, IgnoreSymbolicNames.
