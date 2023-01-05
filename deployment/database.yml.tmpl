@@ -1,0 +1,9 @@
+production:
+  adapter: "mysql2"
+  encoding: "utf8mb4"
+  collation: "utf8mb4_unicode_520_ci"
+  username: "{{ env "MYSQL_USER" }}"
+  password: "{{ secret "db_password" }}"
+  database: "{{ env "MYSQL_DB" }}"
+  host: "{{ env "MYSQL_HOST" }}"
+  port: "{{ env "MYSQL_PORT" }}"

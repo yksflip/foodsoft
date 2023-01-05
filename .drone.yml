@@ -1,0 +1,145 @@
+kind: pipeline
+type: docker
+name: build and test
+
+steps:
+  - name: rubocop
+    image: circleci/ruby:2.7-bullseye-node-browsers-legacy
+    commands:
+      - sudo apt install --no-install-recommends -y libmagic-dev
+      - sudo -E bundle install 
+      - sudo -E bundle exec rubocop
+    volumes:
+      - name: gem-cache
+        path: /bundle
+      - name: tmp
+        path: /drone/src/tmp
+    failure: ignore
+
+
+  - name: build_test
+    image: circleci/ruby:2.7-bullseye-node-browsers-legacy
+    commands:
+      - sudo apt install --no-install-recommends -y libmagic-dev
+      - echo 'Wait for db container'; sleep 30
+      - bundle config set path '/bundle'
+      - bundle config set without 'production'
+      - sudo -E bundle install
+      - sudo -E bundle exec rake foodsoft:setup_development_docker || true
+      - sudo -E bundle exec rake rspec-rerun:spec
+    volumes:
+      - name: gem-cache
+        path: /bundle
+      - name: tmp
+        path: /drone/src/tmp
+    environment:
+      RAILS_LOG_TO_STDOUT: true
+      RAILS_ENV: test
+      COVERAGE: lcov
+      DATABASE_URL: mysql2://user:password@mariadb/test?encoding=utf8mb4
+      DATABASE_CLEANER_ALLOW_REMOTE_DATABASE_URL: true
+      PARALLEL_TEST_PROCESSORS: 60
+
+services:
+  - name: mariadb
+    image: mariadb
+    environment:
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: test
+      MYSQL_ROOT_PASSWORD: password
+
+volumes:
+  - name: gem-cache
+    host:
+      path: /tmp/cache
+  - name: tmp
+    temp: {}
+---
+
+kind: pipeline
+type: docker
+name: docker build and deploy
+steps:
+  - name: build and publish docker image
+    image: plugins/docker
+    settings:
+      registry: git.local-it.org
+      repo: git.local-it.org/foodsoft/foodsoft
+      username: philipp
+      password:
+        from_secret: docker_registry
+      tags:
+        - latest
+        - ${DRONE_BRANCH}
+        - ${DRONE_COMMIT:0:8}
+      cache_from:
+        - "git.local-it.org/foodsoft/foodsoft:latest"
+        - "git.local-it.org/foodsoft/foodsoft:${DRONE_BRANCH}"
+  - name: deployment
+    image: git.local-it.org/philipp/stack-ssh-deply:latest
+    settings:
+      stack: "foodsoft_${DRONE_COMMIT:0:8}"
+      compose: "deployment/compose.yml"
+      deploy_key:
+        from_secret: drone_deploy_key
+      host: "dev.local-it.cloud"
+      user: "root"
+      port: 22
+      reg_user: philipp
+      reg_pass:
+        from_secret: docker_registry
+      reg_url: git.local-it.org
+      image: git.local-it.org/foodsoft/foodsoft:${DRONE_COMMIT:0:8}
+      generate_secrets: true
+      networks:
+        - proxy
+    environment:
+      IMAGE: git.local-it.org/foodsoft/foodsoft:${DRONE_COMMIT:0:8}
+      STACK_NAME: "foodsoft_${DRONE_COMMIT:0:8}"
+      DOMAIN: "${DRONE_COMMIT:0:8}.foodsoft.dev.local-it.cloud"
+      LETS_ENCRYPT_ENV: production
+      FOODCOOP_MULTI_INSTALL: true
+      FOODCOOP_NAME: example
+      FOODCOOP_CITY: XXX
+      FOODCOOP_COUNTRY: XXX
+      FOODCOOP_EMAIL: info@example.org
+      FOODCOOP_PHONE: XXX
+      FOODCOOP_STREET: XXX
+      FOODCOOP_ZIP_CODE: XXX
+      FOODCOOP_HOMEPAGE: https://order.example.org
+      FOODCOOP_HELP_URL: https://order.example.org
+      FOODCOOP_TIME_ZONE: Berlin
+      FOODCOOP_USE_NICK: true
+      FOODCOOP_LANGUAGE: de
+      FOODCOOP_FOOTER: '<a href="https://example.org/">example</a> hosted by <a href="https://yourhoster.org">Your Tech Co-op</a>.'
+      USE_APPLE_POINTS: false
+      STOP_ORDERING_UNDER: 75
+      MINIMUM_BALANCE: 0
+      MYSQL_DB: foodsoft
+      MYSQL_HOST: db
+      MYSQL_PORT: 3306
+      MYSQL_USER: foodsoft
+      EMAIL_SENDER: noreply@example.org
+      EMAIL_ERROR: systems@example.org
+      SMTP_ADDRESS: mail.example.com
+      SMTP_AUTHENTICATION: plain
+      SMTP_DOMAIN: mail.example.com
+      SMTP_ENABLE_STARTTLS_AUTO: true
+      SMTP_PORT: 587
+      SMTP_USER_NAME: foodsoft
+      EMAIL_REPLY_DOMAIN: example.org
+      SMTP_SERVER_HOST: 0.0.0.0
+      SMTP_SERVER_PORT: 2525
+      SECRET_DB_PASSWORD_VERSION: v1
+      SECRET_DB_ROOT_PASSWORD_VERSION: v1
+      SECRET_SHARED_LISTS_DB_PASSWORD_VERSION: v1
+      SECRET_SMTP_PASSWORD_VERSION: v1
+      SECRET_SECRET_KEY_BASE_VERSION: v1
+      APP_CONFIG_VERSION: v1
+      DB_CONFIG_VERSION: v1
+      ENTRYPOINT_VERSION: v1
+      PRODUCTION_ENV_VERSION: v1
+trigger:
+  branch:
+  - demo

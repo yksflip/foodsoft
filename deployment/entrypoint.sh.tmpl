@@ -1,0 +1,44 @@
+#!/bin/bash
+
+set -eu
+
+file_env() {
+  local var="$1"
+  local fileVar="${var}_FILE"
+  local def="${2:-}"
+
+  if [ "${!var:-}" ] && [ "${!fileVar:-}" ]; then
+    echo >&2 "error: both $var and $fileVar are set (but are exclusive)"
+    exit 1
+  fi
+
+  local val="$def"
+
+  if [ "${!var:-}" ]; then
+    val="${!var}"
+  elif [ "${!fileVar:-}" ]; then
+    val="$(< "${!fileVar}")"
+  fi
+
+  export "$var"="$val"
+  unset "$fileVar"
+}
+
+file_env "SECRET_KEY_BASE"
+file_env "SMTP_PASSWORD"
+
+echo "------------------------------------------------------------------------------"
+echo "Running entrypoint commands against '$FOODSOFT_SERVICE' service"
+echo "------------------------------------------------------------------------------"
+
+if [ "$FOODSOFT_SERVICE" == "app" ]; then
+  bundle exec rake db:setup || true
+  bundle exec rake db:migrate || true
+  ./proc-start web
+elif [ "$FOODSOFT_SERVICE" == "cron" ]; then
+  ./proc-start cron
+elif [ "$FOODSOFT_SERVICE" == "worker" ]; then
+  ./proc-start worker
+elif [ "$FOODSOFT_SERVICE" == "smtp" ]; then
+  ./proc-start mail
+fi
