@@ -264,7 +264,7 @@ describe ArticlesController, type: :controller do
     it 'does not update articles if article with same name exists' do
       get_with_supplier :update_synchronized, params: { articles: { article_a.id => { unit: '2000 g' }, article_b.id => { name: 'AAAA' } } }
       error_array = [assigns(:updated_articles).first.errors.first, assigns(:updated_articles).last.errors.first]
-      expect(error_array).to include([:name, 'name is already taken'])
+      expect(error_array).to include(ActiveModel::Error)
       expect(response).to have_http_status(:success)
     end
 

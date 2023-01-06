@@ -1,6 +1,6 @@
 require 'csv'
 
-class InvoicesCsv < RenderCSV
+class InvoicesCsv < RenderCsv
   include ApplicationHelper
 
   def header
@@ -32,7 +32,7 @@ class InvoicesCsv < RenderCSV
         t.deposit,
         t.deposit_credit,
         t.paid_on,
-        t.note,
+        t.note
       ]
     end
   end

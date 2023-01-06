@@ -44,6 +44,8 @@ class FoodsoftConfig
   #   @return [ActiveSupport::HashWithIndifferentAccess] Current configuration from configuration file.
   mattr_accessor :config
 
+  mattr_accessor :default_config
+
   # Configuration file location.
   #   Taken from environment variable +FOODSOFT_APP_CONFIG+,
   #   or else +config/app_config.yml+.
@@ -189,7 +191,7 @@ class FoodsoftConfig
 
     # @return [Hash] Full configuration.
     def to_hash
-      keys.to_h { |k| [k, self[k]] }
+      keys.index_with { |k| self[k] }
     end
 
     # for using active_model_serializer in the api/v1/configs controller
@@ -216,7 +218,6 @@ class FoodsoftConfig
     #       end
     #
     #   @return [Hash] Default configuration values
-    mattr_accessor :default_config
 
     private
 
@@ -229,7 +230,7 @@ class FoodsoftConfig
     end
 
     def setup_database
-      database_config = ActiveRecord::Base.configurations[Rails.env]
+      database_config = ActiveRecord::Base.configurations.find_db_config(Rails.env).configuration_hash
       database_config = database_config.merge(config[:database]) if config[:database].present?
       ActiveRecord::Base.establish_connection(database_config)
     end

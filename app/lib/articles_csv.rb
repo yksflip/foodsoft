@@ -1,4 +1,4 @@
-class ArticlesCsv < RenderCSV
+class ArticlesCsv < RenderCsv
   include ApplicationHelper
 
   def header
@@ -16,7 +16,7 @@ class ArticlesCsv < RenderCSV
       Article.human_attribute_name(:unit_quantity),
       '',
       '',
-      Article.human_attribute_name(:article_category),
+      Article.human_attribute_name(:article_category)
     ]
   end
 
@@ -36,7 +36,7 @@ class ArticlesCsv < RenderCSV
         o.unit_quantity,
         '',
         '',
-        o.article_category.try(:name),
+        o.article_category.try(:name)
       ]
     end
   end
