@@ -15,7 +15,9 @@ ENV PORT=3000 \
 
 WORKDIR /usr/src/app
 
-COPY . ./
+COPY Gemfile Gemfile.lock ./
+COPY plugins/ ./plugins
+COPY config/ ./config
 
 # install dependencies and generate crontab
 RUN buildDeps='libmagic-dev' && \
@@ -29,6 +31,8 @@ RUN buildDeps='libmagic-dev' && \
     rm -Rf /var/lib/apt/lists/* /var/cache/apt/* ~/.gemrc ~/.bundle && \
     \
     bundle exec whenever >crontab
+
+COPY . ./
 
 # compile assets with temporary mysql server
 RUN export DATABASE_URL=mysql2://localhost/temp?encoding=utf8 && \
