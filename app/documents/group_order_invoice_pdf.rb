@@ -1,4 +1,4 @@
-class GroupOrderInvoicePdf < RenderPDF
+class GroupOrderInvoicePdf < RenderPdf
   def filename
     I18n.t('documents.group_order_invoice_pdf.filename', :number => @options[:invoice_number]) + '.pdf'
   end

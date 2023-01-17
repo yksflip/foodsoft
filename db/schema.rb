@@ -182,6 +182,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_06_144440) do
     t.index ["order_article_id"], name: "index_group_order_articles_on_order_article_id"
   end
 
+  create_table "group_order_invoices", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.integer "group_order_id"
+    t.bigint "invoice_number"
+    t.date "invoice_date"
+    t.string "payment_method"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.index ["group_order_id"], name: "index_group_order_invoices_on_group_order_id", unique: true
+  end
+
   create_table "group_orders", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "ordergroup_id"
     t.integer "order_id", default: 0, null: false
