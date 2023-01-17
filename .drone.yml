@@ -79,7 +79,7 @@ steps:
   - name: deployment
     image: git.local-it.org/philipp/stack-ssh-deply:latest
     settings:
-      stack: "foodsoft_${DRONE_COMMIT:0:8}"
+      stack: "foodsoft_tantewandel"
       compose: "deployment/compose.yml"
       deploy_key:
         from_secret: drone_deploy_key
@@ -96,19 +96,19 @@ steps:
         - proxy
     environment:
       IMAGE: git.local-it.org/foodsoft/foodsoft:${DRONE_COMMIT:0:8}
-      STACK_NAME: "foodsoft_${DRONE_COMMIT:0:8}"
-      DOMAIN: "${DRONE_COMMIT:0:8}.foodsoft.dev.local-it.cloud"
+      STACK_NAME: "foodsoft_tantewandel"
+      DOMAIN: "tantewandel.dev.local-it.cloud"
       LETS_ENCRYPT_ENV: production
       FOODCOOP_MULTI_INSTALL: true
-      FOODCOOP_NAME: example
-      FOODCOOP_CITY: XXX
-      FOODCOOP_COUNTRY: XXX
-      FOODCOOP_EMAIL: info@example.org
-      FOODCOOP_PHONE: XXX
-      FOODCOOP_STREET: XXX
-      FOODCOOP_ZIP_CODE: XXX
-      FOODCOOP_HOMEPAGE: https://order.example.org
-      FOODCOOP_HELP_URL: https://order.example.org
+      FOODCOOP_NAME: Tantewandel 
+      FOODCOOP_CITY: Mechow 
+      FOODCOOP_COUNTRY: Deutschland 
+      FOODCOOP_EMAIL: info@tantewandel.de
+      FOODCOOP_PHONE: 
+      FOODCOOP_STREET: 
+      FOODCOOP_ZIP_CODE: 
+      FOODCOOP_HOMEPAGE: https://tantewandel.de
+      FOODCOOP_HELP_URL: https://tantewandel.de
       FOODCOOP_TIME_ZONE: Berlin
       FOODCOOP_USE_NICK: true
       FOODCOOP_LANGUAGE: de
@@ -120,17 +120,17 @@ steps:
       MYSQL_HOST: db
       MYSQL_PORT: 3306
       MYSQL_USER: foodsoft
-      EMAIL_SENDER: noreply@example.org
-      EMAIL_ERROR: systems@example.org
-      SMTP_ADDRESS: mail.example.com
-      SMTP_AUTHENTICATION: plain
-      SMTP_DOMAIN: mail.example.com
+      EMAIL_SENDER: demo@local-it.org
+      EMAIL_ERROR: flip@yksflip.de
+      SMTP_ADDRESS: mail.local-it.org
+      SMTP_AUTHENTICATION: login
+      SMTP_DOMAIN: mail.local-it.org
       SMTP_ENABLE_STARTTLS_AUTO: true
       SMTP_PORT: 587
-      SMTP_USER_NAME: foodsoft
-      EMAIL_REPLY_DOMAIN: example.org
-      SMTP_SERVER_HOST: 0.0.0.0
-      SMTP_SERVER_PORT: 2525
+      SMTP_USER_NAME: demo@local-it.org
+      EMAIL_REPLY_DOMAIN: 
+      SMTP_SERVER_HOST: 
+      SMTP_SERVER_PORT: 
       SECRET_DB_PASSWORD_VERSION: v1
       SECRET_DB_ROOT_PASSWORD_VERSION: v1
       SECRET_SHARED_LISTS_DB_PASSWORD_VERSION: v1
@@ -143,3 +143,4 @@ steps:
 trigger:
   branch:
   - demo
+  - tantewandel
