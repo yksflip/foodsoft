@@ -126,3 +126,5 @@ group :test do
   gem 'rswag-specs'
   gem 'hashie', '~> 3.4.6', require: false # https://github.com/westfieldlabs/apivore/issues/114
 end
+
+gem "importmap-rails", "~> 1.1"
