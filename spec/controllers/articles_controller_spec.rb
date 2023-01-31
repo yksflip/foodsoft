@@ -187,8 +187,8 @@ describe ArticlesController, type: :controller do
   describe '#parse_upload' do
     let(:file) { Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/files/upload_test.csv'), original_filename: 'upload_test.csv') }
 
-    it 'updates particles from spreadsheet' do
-      post_with_supplier :parse_upload, params: { articles: { file: file, outlist_absent: '1', convert_units: '1' } }
+    it 'updates articles from spreadsheet' do
+      post_with_supplier :parse_upload, params: { articles: { file: file, outlist_absent: '1', convert_units: '1', type: 'foodsoft' } }
       expect(response).to have_http_status(:success)
     end
 
