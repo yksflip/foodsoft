@@ -1,3 +1,4 @@
+require 'foodsoft_article_import'
 class Supplier < ApplicationRecord
   include MarkAsDeletedWithName
   include CustomFields
@@ -73,13 +74,16 @@ class Supplier < ApplicationRecord
   # Synchronise articles with spreadsheet.
   #
   # @param file [File] Spreadsheet file to parse
-  # @param options [Hash] Options passed to {FoodsoftFile#parse} except when listed here.
+  # @param options [Hash] Options passed to {FoodsoftArticleImport#parse} except when listed here.
   # @option options [Boolean] :outlist_absent Set to +true+ to remove articles not in spreadsheet.
   # @option options [Boolean] :convert_units Omit or set to +true+ to keep current units, recomputing unit quantity and price.
-  def sync_from_file(file, options = {})
+  def sync_from_file(file, type, options = {})
     all_order_numbers = []
     updated_article_pairs, outlisted_articles, new_articles = [], [], []
-    FoodsoftFile::parse file, options do |status, new_attrs, line|
+    custom_codes_path = File.join(Rails.root, "config", "custom_codes.yml")
+    opts = options.except(:convert_units, :outlist_absent)
+    custom_codes_file_path = custom_codes_path if File.exist?(custom_codes_path)
+    FoodsoftArticleImport.parse(file, custom_file_path: custom_codes_file_path, type: type, **opts) do |new_attrs, status, line|
       article = articles.undeleted.where(order_number: new_attrs[:order_number]).first
 
       if new_attrs[:article_category].present? && options[:update_category]
