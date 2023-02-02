@@ -42,12 +42,12 @@ feature ArticlesController do
     before do
       visit upload_supplier_articles_path(supplier_id: supplier.id)
       attach_file 'articles_file', file
+      find("#articles_type option[value='foodsoft']").select_option
     end
 
     Dir.glob('spec/fixtures/foodsoft_file_01.*') do |test_file|
       describe "can import articles from #{test_file}" do
         let(:file) { Rails.root.join(test_file) }
-
         it do
           find('input[type="submit"]').click
           expect(find("tr:nth-child(1) #new_articles__note").value).to eq "bio ◎"
