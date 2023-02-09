@@ -834,6 +834,7 @@ fr:
     email:
       footer_3_homepage: 'Boufcoop: %{url}'
       footer_4_help: 'Aide: %{url}'
+      help: 'Aide'
     footer:
       revision: révision %{revision}
     header:
