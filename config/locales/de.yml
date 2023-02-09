@@ -1222,6 +1222,7 @@ de:
       footer_2_foodsoft: 'Foodsoft: %{url}'
       footer_3_homepage: 'Foodcoop: %{url}'
       footer_4_help: 'Hilfe: %{url}'
+      help: 'Hilfe'
     foodsoft: Foodsoft
     footer:
       revision: Revision %{revision}

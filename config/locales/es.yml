@@ -1083,6 +1083,7 @@ es:
   layouts:
     email:
       footer_4_help: 'Ayuda: %{url}'
+      help: 'Ayuda'
     footer:
       revision: revisión %{revision}
     header:
