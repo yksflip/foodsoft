@@ -7,7 +7,6 @@ gem 'mail', '~> 2.7.1' # bug with mail 2.8.0 https://github.com/mikel/mail/issue
 
 gem 'sassc-rails'
 gem 'less-rails'
-gem 'uglifier'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 
@@ -128,3 +127,5 @@ group :test do
 end
 
 gem "importmap-rails", "~> 1.1"
+
+gem "terser", "~> 1.1"
