@@ -4,9 +4,8 @@ source 'https://rubygems.org'
 gem 'mail', '~> 2.7.1' # bug with mail 2.8.0 https://github.com/mikel/mail/issues/1489
 gem 'rails', '~> 7.0'
 
-gem 'less-rails'
 gem 'sassc-rails'
-gem 'uglifier'
+gem 'less-rails'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 
@@ -124,3 +123,5 @@ group :test do
   # api
   gem 'rswag-specs'
 end
+
+gem "terser", "~> 1.1"
