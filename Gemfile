@@ -127,6 +127,5 @@ group :test do
 end
 
 gem "importmap-rails", "~> 1.1"
-
-gem "terser", "~> 1.1"
 gem "image_processing", "~> 1.12"
+gem "terser", "~> 1.1"
