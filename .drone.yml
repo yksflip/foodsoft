@@ -7,7 +7,7 @@ steps:
     image: circleci/ruby:2.7-bullseye-node-browsers-legacy
     commands:
       - sudo apt install --no-install-recommends -y libmagic-dev
-      - sudo -E bundle install 
+      - sudo -E bundle install
       - sudo -E bundle exec rubocop
     volumes:
       - name: gem-cache
@@ -100,13 +100,13 @@ steps:
       DOMAIN: "tantewandel.dev.local-it.cloud"
       LETS_ENCRYPT_ENV: production
       FOODCOOP_MULTI_INSTALL: true
-      FOODCOOP_NAME: Tantewandel 
-      FOODCOOP_CITY: Mechow 
-      FOODCOOP_COUNTRY: Deutschland 
+      FOODCOOP_NAME: Tantewandel
+      FOODCOOP_CITY: Mechow
+      FOODCOOP_COUNTRY: Deutschland
       FOODCOOP_EMAIL: info@tantewandel.de
-      FOODCOOP_PHONE: 
-      FOODCOOP_STREET: 
-      FOODCOOP_ZIP_CODE: 
+      FOODCOOP_PHONE:
+      FOODCOOP_STREET:
+      FOODCOOP_ZIP_CODE:
       FOODCOOP_HOMEPAGE: https://tantewandel.de
       FOODCOOP_HELP_URL: https://tantewandel.de
       FOODCOOP_TIME_ZONE: Berlin
@@ -128,9 +128,9 @@ steps:
       SMTP_ENABLE_STARTTLS_AUTO: true
       SMTP_PORT: 587
       SMTP_USER_NAME: demo@local-it.org
-      EMAIL_REPLY_DOMAIN: 
-      SMTP_SERVER_HOST: 
-      SMTP_SERVER_PORT: 
+      EMAIL_REPLY_DOMAIN:
+      SMTP_SERVER_HOST:
+      SMTP_SERVER_PORT:
       SECRET_DB_PASSWORD_VERSION: v1
       SECRET_DB_ROOT_PASSWORD_VERSION: v1
       SECRET_SHARED_LISTS_DB_PASSWORD_VERSION: v1

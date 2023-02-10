@@ -7,7 +7,6 @@ gem 'mail', '~> 2.7.1' # bug with mail 2.8.0 https://github.com/mikel/mail/issue
 
 gem 'sassc-rails'
 gem 'less-rails'
-gem 'uglifier'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 gem 'therubyracer', platforms: :ruby
 
@@ -126,3 +125,7 @@ group :test do
   gem 'rswag-specs'
   gem 'hashie', '~> 3.4.6', require: false # https://github.com/westfieldlabs/apivore/issues/114
 end
+
+gem "importmap-rails", "~> 1.1"
+gem "image_processing", "~> 1.12"
+gem "terser", "~> 1.1"

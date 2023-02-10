@@ -67,6 +67,8 @@ module Foodsoft
 
     config.autoloader = :zeitwerk
 
+    config.active_storage.variant_processor = :mini_magick
+
     # Ex:- :default =>''
 
     # CORS for API
