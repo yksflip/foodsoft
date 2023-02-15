@@ -63,7 +63,10 @@ class GroupOrder < ApplicationRecord
     # add counts from the previous group order
     if previous_group_order
       previous_group_order.group_order_articles.each do |goa|
-        order_article_id = OrderArticle.find_by!(order: order, article: goa.order_article.article)&.id
+        order_article_id = OrderArticle.find_by(order: order, article: goa.order_article.article)&.id
+        puts " order ID: #{order.id}"
+        puts " article ID: #{goa.order_article.article.id}"
+        puts "ID: #{order_article_id}"
         data[:order_articles][order_article_id] ||= {}
         data[:order_articles][order_article_id][:previous_quantity]  = goa.quantity
         data[:order_articles][order_article_id][:previous_tolerance] = goa.tolerance
@@ -76,7 +79,7 @@ class GroupOrder < ApplicationRecord
   end
 
   def previous_group_order
-    previous_order = ordergroup.orders.where.not(id: order.id).recent.first
+    previous_order = ordergroup.orders.where(supplier: order.supplier).where.not(id: order.id).recent.first
     return nil unless previous_order
 
     ordergroup.group_orders.find_by(order_id: previous_order.id)
