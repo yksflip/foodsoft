@@ -35,6 +35,7 @@ class GroupOrder < ApplicationRecord
     data[:account_balance] = ordergroup.nil? ? BigDecimal.new('+Infinity') : ordergroup.account_balance
     data[:available_funds] = ordergroup.nil? ? BigDecimal.new('+Infinity') : ordergroup.get_available_funds(self)
 
+
     # load prices and other stuff....
     data[:order_articles] = {}
     order.articles_grouped_by_category.each do |article_category, order_articles|
@@ -59,7 +60,26 @@ class GroupOrder < ApplicationRecord
       end
     end
 
+    # add counts from the previous group order
+    if previous_group_order
+      previous_group_order.group_order_articles.each do |goa|
+        order_article_id = OrderArticle.find_by(order: order, article: goa.order_article.article)&.id
+        data[:order_articles][order_article_id] ||= {}
+        data[:order_articles][order_article_id][:previous_quantity]  = goa.quantity
+        data[:order_articles][order_article_id][:previous_tolerance] = goa.tolerance
+      end
+    end
+
+    puts data
+
     data
+  end
+
+  def previous_group_order
+    previous_order = ordergroup.orders.where.not(id: order.id).recent.first
+    return nil unless previous_order
+
+    ordergroup.group_orders.find_by(order_id: previous_order.id)
   end
 
   def save_group_order_articles

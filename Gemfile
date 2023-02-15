@@ -90,8 +90,6 @@ group :development do
 
   # Get infos when not using proper eager loading
   gem 'bullet'
-  # Display Active Record queries as tables in the console
-  gem 'table_print'
 end
 
 group :development, :test do
@@ -103,6 +101,8 @@ group :development, :test do
   # allow to use `debugger` https://github.com/conradirwin/pry-rescue
   gem 'pry-rescue'
   gem 'pry-stack_explorer'
+  # Display Active Record queries as tables in the console
+  gem 'table_print'
 end
 
 group :test do
