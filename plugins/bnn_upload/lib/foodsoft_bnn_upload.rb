@@ -1,3 +1,4 @@
+require "deface"
 require 'foodsoft_bnn_upload/engine'
 
 module FoodsoftBnnUpload
