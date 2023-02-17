@@ -17,6 +17,13 @@ GIT
       activerecord (>= 3.0.9)
 
 PATH
+  remote: plugins/bnn_upload
+  specs:
+    foodsoft_bnn_upload (0.0.1)
+      deface (~> 1.0)
+      rails
+
+PATH
   remote: plugins/discourse
   specs:
     foodsoft_discourse (0.0.1)
@@ -618,6 +625,7 @@ DEPENDENCIES
   exception_notification
   factory_bot_rails
   faker
+  foodsoft_bnn_upload!
   foodsoft_discourse!
   foodsoft_documents!
   foodsoft_links!

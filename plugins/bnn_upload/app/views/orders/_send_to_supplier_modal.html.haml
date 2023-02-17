@@ -1,0 +1,12 @@
+= form_with url: send_result_to_supplier_path(@order) do |f|
+  .modal-header
+    = close_button :modal
+    .h3="Choose file formats that will be attached to your Email"
+  .modal-body
+    = f.check_box 'file_formats[pdf]'
+    = f.label 'file_formats[pdf]', "PDF"
+  .modal-footer
+    = link_to t('ui.close'), '#', class: 'btn', data: {dismiss: 'modal'}
+    = f.submit class: 'btn btn-primary'
+
+    

@@ -1,0 +1,6 @@
+/ replace 'erb:contains("send_result_to_supplier")'
+- if FoodsoftBnnUpload.enabled?
+  - raise
+  = link_to t('.send_to_supplier'), send_result_to_supplier_modal_order_path(@order), remote: true,
+    class: "btn#{' btn-primary' unless @order.last_sent_mail}",
+    data: {confirm: @order.last_sent_mail && t('.confirm_send_to_supplier', when: format_time(@order.last_sent_mail)) }
