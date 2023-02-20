@@ -1018,6 +1018,7 @@ nl:
       error_stale: In de tussentijd heeft iemand anders ook bestelt, daarom kon de bestelling niet bijgewerkt worden.
       notice: Bestelling opgeslagen.
     errors:
+      balance_alert: Accountsaldo in het rood
       closed: Deze bestelling is al gesloten.
       no_member: Je bent geen lid van dit huishouden.
       notfound: Foute URL, dit is niet jouw bestelling.
@@ -1029,6 +1030,7 @@ nl:
       search_article: Artikelen zoeken...
       sum_amount: Huidig totaalbedrag
       title: Bestellen
+      sub_title: Plaats bestelling voor %{order_name}
       total_sum_amount: Totalbedrag
       total_tolerance: Totale tolerantie
       units: Eenheden
@@ -1072,7 +1074,6 @@ nl:
       sum: Som
       title: Jouw bestelling voor %{order}
     switch_order:
-      remaining: "nog %{remaining}"
       title: Lopende bestellingen
     update:
       error_general: Er is een probleem opgetreden, de bestelling kon niet bijgewerkt worden.

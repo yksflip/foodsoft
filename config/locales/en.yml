@@ -1048,9 +1048,23 @@ en:
       error_stale: Someone else has ordered in the meantime, couldn't update the order.
       notice: The order was saved.
     errors:
+      balance_alert: Negative account balance
       closed: This order is already closed.
       no_member: You are not a member of an ordergroup.
       notfound: Incorrect URL, this is not your order.
+    explanations:
+      title: Explanations
+      tolerance: Tolerance
+      package_fill_level: |
+        Package Fill Level
+      missing_none: |
+        No more missing
+      missing_few: |
+        Few missing
+      missing_many: |
+        Many missing
+      tolerance_explained: |
+        Additional amount you would buy to fill a wholesale package
     form:
       action_save: Save order
       new_funds: New account balance
@@ -1059,6 +1073,7 @@ en:
       search_article: Search for articles...
       sum_amount: Current amount
       title: Orders
+      sub_title: Place order for %{order_name}
       total_sum_amount: Total amount
       total_tolerance: Total tolerance
       units: Units
@@ -1102,7 +1117,6 @@ en:
       sum: Sum
       title: Your order result for %{order}
     switch_order:
-      remaining: "%{remaining} remaining"
       title: Current orders
     update:
       error_general: The order couldn’t be updated due to a bug.

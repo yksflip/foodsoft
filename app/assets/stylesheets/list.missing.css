@@ -1,11 +1,23 @@
-.list .missing-many td, .list .missing-many:hover td {
-	background-color: #ebbebe;
+.missing-many td {
+	background-color: #ffc590aa;
 }
 
-.list .missing-few td, .list .missing-few:hover td {
-	background-color: #ffee75;
+.missing-many:hover td, .missing-many:focus td {
+	background-color: #ffc590;
 }
 
-.list .missing-none td, .list .missing-none:hover td {
-	background-color: #E4EED6;
+.missing-few td {
+	background-color: #fcf488aa;
+}
+
+.missing-few:hover td, .missing-few:focus td {
+	background-color: #fcf488;
+}
+
+.missing-none td {
+	background-color: #d0f6ffaa;
+}
+
+.missing-none:hover td, .missing-none:focus td  {
+	background-color: #d0f6ff;
 }

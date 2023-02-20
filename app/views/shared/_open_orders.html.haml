@@ -9,6 +9,7 @@
       %thead
         %tr
           %th= heading_helper Order, :name
+          %th
           %th= heading_helper Order, :pickup
           %th= heading_helper Order, :ends
           %th= t '.who_ordered'
@@ -17,21 +18,23 @@
         - total = 0
         - orders.each do |order|
           %tr
-            %td= link_to_ordering(order)
+            %td
+              = link_to_ordering(order, show: true)
+            %td
+              .btn-small= link_to_ordering(order){ t 'ui.edit' }
             %td= format_date(order.pickup) unless order.pickup.nil?
             %td= format_time(order.ends) unless order.ends.nil?
             - if group_order = order.group_order(ordergroup)
               - total += group_order.price
               %td= "#{show_user group_order.updated_by} (#{format_time(group_order.updated_on)})"
               %td.numeric
-                = link_to_ordering(order, show: true) do
-                  = number_to_currency(group_order.price)
+                = number_to_currency(group_order.price)
             - else
               %td{:colspan => 2}
       - if total > 0
         %tfooter
           %tr
-            %th(colspan="3")
+            %th(colspan="4")
             %th= t('.total_sum') + ':'
             %th.numeric= number_to_currency(total)
   - else

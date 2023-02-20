@@ -1046,9 +1046,23 @@ de:
       error_stale: In der Zwischenzeit hat jemand anderes auch bestellt, daher konnte die Bestellung nicht aktualisiert werden.
       notice: Die Bestellung wurde gespeichert.
     errors:
+      balance_alert: Kontostand im Minus
       closed: Diese Bestellung ist bereits abgeschlossen.
       no_member: Du bist kein Mitglieder einer Bestellgruppe.
       notfound: Fehlerhafte URL, das ist nicht Deine Bestellung.
+    explanations:
+      package_fill_level: |
+        Gebindefüllstand
+      missing_none: |
+        Voll
+      missing_few: |
+        Wenig fehlt
+      missing_many: |
+        Viel fehlt
+      title: Erklärungen
+      tolerance_explained: |
+        Zusätzliche Menge die du bestellen würdest, damit das Gebinde voll wird.
+      tolerance: Toleranz
     form:
       action_save: Bestellung speichern
       new_funds: Neuer Kontostand
@@ -1057,6 +1071,7 @@ de:
       search_article: Artikel suchen...
       sum_amount: Gesamtbestellmenge bisher
       title: Bestellen
+      sub_title: Bestellung für %{order_name} aufgeben
       total_sum_amount: Gesamtbetrag
       total_tolerance: Gesamt-Toleranz
       units: Gebinde
@@ -1100,7 +1115,6 @@ de:
       sum: Summe
       title: Dein Bestellergebnis für %{order}
     switch_order:
-      remaining: "noch %{remaining}"
       title: Laufende Bestellungen
     update:
       error_general: Die Bestellung konnte nicht aktualisiert werden, da ein Fehler auftrat.

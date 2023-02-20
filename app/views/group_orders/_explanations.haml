@@ -1,0 +1,15 @@
+%h4= t '.title'
+%hr
+%table.table-condensed
+  %thead
+    %th= t '.package_fill_level'
+  %tbody
+    %tr{class: "missing-none"}
+      %td= t '.missing_none'
+    %tr{class: "missing-few"}
+      %td= t '.missing_few'
+    %tr{class: "missing-many"}
+      %td= t '.missing_many'
+%hr
+  %b= t('.tolerance') + ':'
+  = t '.tolerance_explained'
