@@ -1101,7 +1101,7 @@ en:
       sum: Sum
       title: Your order result for %{order}
     switch_order:
-      remaining: "%{remaining} remaining"
+      remaining: "%{remaining} until order closes"
       title: Current orders
     update:
       error_general: The order couldn’t be updated due to a bug.

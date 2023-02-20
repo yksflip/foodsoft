@@ -1,9 +1,10 @@
-- orders = Order.open.started.reject{ |order| order == current_order }
+- orders = Order.open.started
 - unless orders.empty?
-  %h2= t '.title'
-  %ul.unstyled
+  %ul.nav.nav-pills.nav-stacked
+    .nav-header= t '.title'
     - orders.each do |order|
-      %li
-        = link_to_ordering(order, 'data-confirm_switch_order' => true)
-        - if order.ends
-          = t '.remaining', remaining: time_ago_in_words(order.ends)
+      %li( class='#{ order == current_order ? "active" : ""}'
+          data-toggle='tooltip'
+          data-placement='left'
+          title='#{t('.remaining', remaining: time_ago_in_words(order.ends))}')
+        = link_to_ordering(order, 'data-confirm_switch_order' => true){ order.ends ? order.name  : order.name }
