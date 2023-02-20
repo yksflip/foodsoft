@@ -111,10 +111,10 @@
               +
               %span.unused{id: "q_unused_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:quantity] - @ordering_data[:order_articles][order_article.id][:used_quantity]
               .btn-group
-                %a.btn.btn-ordering{'data-increase_quantity' => order_article.id}
-                  %i.icon-plus
                 %a.btn.btn-ordering{'data-decrease_quantity' => order_article.id}
                   %i.icon-minus
+                %a.btn.btn-ordering{'data-increase_quantity' => order_article.id}
+                  %i.icon-plus
 
             %td.tolerance{style: ('display:none' if @order.stockit?)}
               %input{id: "t_#{order_article.id}", name: "group_order[group_order_articles_attributes][#{order_article.id}][tolerance]", type: "hidden", value: @ordering_data[:order_articles][order_article.id][:tolerance], 'data-min' => (@ordering_data[:order_articles][order_article.id][:tolerance] if @order.boxfill?)}/
@@ -123,10 +123,10 @@
                 +
                 %span.unused{id: "t_unused_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:tolerance] - @ordering_data[:order_articles][order_article.id][:used_tolerance]
                 .btn-group
-                  %a.btn.btn-ordering{'data-increase_tolerance' => order_article.id}
-                    %i.icon-plus
                   %a.btn.btn-ordering{'data-decrease_tolerance' => order_article.id}
                     %i.icon-minus
+                  %a.btn.btn-ordering{'data-increase_tolerance' => order_article.id}
+                    %i.icon-plus
 
             %td{id: "td_price_#{order_article.id}", style: "text-align:right; padding-right:10px; width:4em"}
               %span{id: "price_#{order_article.id}_display"}= number_to_currency(@ordering_data[:order_articles][order_article.id][:total_price])
