@@ -66,6 +66,7 @@ services:
     environment:
       <<: *env
       FOODSOFT_SERVICE: app
+      RAILS_SERVE_STATIC_FILES: 'true'
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000"]
       interval: 15s
