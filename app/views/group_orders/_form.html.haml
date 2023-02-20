@@ -24,7 +24,6 @@
 
 .row-fluid
   .well.pull-left
-    = close_button :alert
     %h2= @order.name
     %dl.dl-horizontal
       - unless @order.note.blank?
@@ -53,7 +52,6 @@
         %dd= number_to_currency(@ordering_data[:available_funds])
 
   .well.pull-right
-    = close_button :alert
     = render 'switch_order', current_order: @order
 
 .row-fluid
