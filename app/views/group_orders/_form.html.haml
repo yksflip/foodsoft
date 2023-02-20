@@ -103,6 +103,9 @@
                   = @ordering_data[:order_articles][order_article.id][:previous_quantity]
                   +
                   = @ordering_data[:order_articles][order_article.id][:previous_tolerance]
+                %a.btn.btn-ordering{"data-reorder_previous": order_article.id, "data-quantity": @ordering_data[:order_articles][order_article.id][:previous_quantity], "data-tolerance": @ordering_data[:order_articles][order_article.id][:previous_tolerance]}
+                  %i.icon-repeat
+                  order previous
             - if @order.stockit?
               %td= truncate order_article.article.supplier.name, length: 15
             %td= h order_article.article.origin
