@@ -55,7 +55,8 @@ RUN export DATABASE_URL=mysql2://localhost/temp?encoding=utf8 && \
 # Make relevant dirs and files writable for app user
 RUN mkdir -p tmp && \
     chown nobody config/app_config.yml && \
-    chown nobody tmp
+    chown nobody tmp && \
+    chown nobody storage
 
 # Run app as unprivileged user
 USER nobody
