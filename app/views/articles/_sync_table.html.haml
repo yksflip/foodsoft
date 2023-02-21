@@ -8,6 +8,7 @@
       %th= heading_helper Article, :unit
       %th= heading_helper Article, :unit_quantity, short: true
       %th= heading_helper Article, :price
+      %th= heading_helper Article, :price_per
       %th= heading_helper Article, :tax
       %th= heading_helper Article, :deposit
       %th= heading_helper Article, :article_category
@@ -23,6 +24,7 @@
           %td= article.unit
           %td= article.unit_quantity
           %td= number_to_currency article.price
+          %td= number_to_currency article.price_per.round(2)
           %td= number_to_percentage article.tax
           %td= number_to_currency article.deposit
           %td= article.article_category.name if article.article_category
@@ -41,6 +43,10 @@
             .input-prepend
               %span.add-on= t 'number.currency.format.unit'
               = form.text_field 'price', class: 'input-mini', style: 'width: 45px'
+          %td{:style => highlight_new(attrs, :price_per)}
+            .input-prepend
+              %span.add-on= t 'number.currency.format.unit'
+              = form.text_field 'price_per', class: 'input-mini', style: 'width: 45px'
           %td{:style => highlight_new(attrs, :tax)}
             .input-append
               = form.text_field 'tax', class: 'input-mini', style: 'width: 45px'

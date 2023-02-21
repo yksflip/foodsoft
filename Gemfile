@@ -51,7 +51,7 @@ gem 'ice_cube'
 # At time of development 01-06-2022 mmddyyyy necessary fix for config_helper.rb form builder was not in rubygems so we pull from github, see: https://github.com/gregschmit/recurring_select/pull/152
 gem 'recurring_select', git: 'https://github.com/gregschmit/recurring_select'
 # TODO: publish gem on github
-gem 'foodsoft_article_import', git: 'https://git.local-it.org/Foodsoft/foodsoft_article_import', tag: 'v0.1'
+gem 'foodsoft_article_import', git: 'https://git.local-it.org/Foodsoft/foodsoft_article_import', tag: 'v1.9'
 gem 'roo'
 gem 'roo-xls'
 gem 'spreadsheet'

@@ -678,6 +678,7 @@ fr:
       action_save: Enregistrer ta commande
       new_funds: Nouveau solde
       price: Prix
+      price_per: Prix par unité de quantité (sans consigne)
       reset_article_search: Réinitialiser la recherche
       search_article: Rechercher des produits...
       sum_amount: Quantité déjà commandée

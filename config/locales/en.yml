@@ -1054,6 +1054,7 @@ en:
       action_save: Save order
       new_funds: New account balance
       price: Price
+      price_per: Price per quantity unit (without deposit)
       reset_article_search: Reset search
       search_article: Search for articles...
       sum_amount: Current amount

@@ -45,6 +45,8 @@ class GroupOrder < ApplicationRecord
         # Build hash with relevant data
         data[:order_articles][order_article.id] = {
           :price => order_article.article.fc_price,
+          :price_per => order_article.article.fc_price_per,
+          :unit_symbol => order_article.article.unit_symbol,
           :unit => order_article.article.unit_quantity,
           :quantity => (goa ? goa.quantity : 0),
           :others_quantity => order_article.quantity - (goa ? goa.quantity : 0),

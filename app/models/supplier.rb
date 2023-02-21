@@ -112,6 +112,7 @@ class Supplier < ApplicationRecord
     if options[:outlist_absent]
       outlisted_articles += articles.undeleted.where.not(order_number: all_order_numbers + [nil])
     end
+    # TODO: change price_per to scale factor
     return [updated_article_pairs, outlisted_articles, new_articles]
   end
 

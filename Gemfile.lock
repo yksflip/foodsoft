@@ -1,11 +1,10 @@
 GIT
   remote: https://git.local-it.org/Foodsoft/foodsoft_article_import
-  revision: c7e432c247ca6aa327ae889d22f78227efed2479
-  tag: v0.1
+  revision: 573851e5497758e1d27d2199f03b939e6bda9e35
+  tag: v1.9
   specs:
     foodsoft_article_import (1.0.0)
       roo (~> 2.9.0)
-      simplecov
 
 GIT
   remote: https://github.com/gregschmit/recurring_select

@@ -142,7 +142,14 @@ class Article < ApplicationRecord
       new_unit_quantity = new_article.unit_quantity
       new_unit = new_article.unit
     end
-
+    puts "
+    " + "______________" + "
+    " + "______________" + "
+    " + "_____oha_________" + "
+    " + "#{new_article.unit_symbol}" + "
+    " + "______________"+ "
+    " + "______________"+ "
+    " + "______________"
     return Article.compare_attributes(
       {
         :name => [self.name, new_article.name],
@@ -153,6 +160,7 @@ class Article < ApplicationRecord
         :tax => [self.tax, new_article.tax],
         :deposit => [self.deposit.to_f.round(2), new_article.deposit.to_f.round(2)],
         :price_per => [self.price_per.to_f.round(2), new_article.price_per.to_f.round(2)],
+        :unit_symbol => [self.unit_symbol, new_article.unit_symbol],
         # take care of different num-objects.
         :unit_quantity => [self.unit_quantity.to_s.to_f, new_unit_quantity.to_s.to_f],
         :note => [self.note.to_s, new_article.note.to_s]

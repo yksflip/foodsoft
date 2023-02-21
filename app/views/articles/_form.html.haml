@@ -1,5 +1,6 @@
 = simple_form_for [@supplier, @article], :validate => true, :remote => true do |f|
   = f.hidden_field :shared_updated_on
+  = f.hidden_field :unit_symbol
   = f.hidden_field :supplier_id
   .modal-header
     = close_button :modal

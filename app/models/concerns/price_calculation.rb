@@ -12,6 +12,14 @@ module PriceCalculation
     add_percent(gross_price, FoodsoftConfig[:price_markup])
   end
 
+  def fc_price_per
+    if price_per > 0
+      add_percent(add_percent(price_per, tax), FoodsoftConfig[:price_markup])
+    else
+      fc_price
+    end
+  end
+
   private
 
   def add_percent(value, percent)
