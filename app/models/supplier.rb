@@ -88,7 +88,6 @@ class Supplier < ApplicationRecord
       new_attrs[:article_category] = ArticleCategory.find_match(new_attrs[:article_category])
       new_attrs[:tax] ||= FoodsoftConfig[:tax_default]
       new_article = articles.build(new_attrs)
-
       if status.nil?
         if article.nil?
           new_articles << new_article

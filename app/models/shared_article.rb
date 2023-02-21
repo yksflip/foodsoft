@@ -19,8 +19,10 @@ class SharedArticle < ApplicationRecord
       :unit_quantity => unit_quantity,
       :order_number => number,
       :article_category => ArticleCategory.find_match(category),
+      :price_per => price_per,
+      :unit_symbol => unit_symbol,
       # convert to db-compatible-string
-      :shared_updated_on => updated_on.to_formatted_s(:db)
+      :shared_updated_on => updated_on.to_fs(:db)
     )
   end
 end
