@@ -5,6 +5,6 @@
     - orders.each do |order|
       %li( class='#{ order == current_order ? "active" : ""}'
           data-toggle='tooltip'
-          data-placement='left'
-          title='#{t('.remaining', remaining: time_ago_in_words(order.ends))}')
-        = link_to_ordering(order, 'data-confirm_switch_order' => true){ order.ends ? order.name  : order.name }
+          data-placement='bottom'
+          title='#{ order.ends ? t('.remaining', remaining: time_ago_in_words(order.ends)) : "" }')
+        = link_to_ordering(order, 'data-confirm_switch_order' => true)

@@ -1099,8 +1099,10 @@ de:
       sum: Summe
       title: Dein Bestellergebnis für %{order}
     switch_order:
-      remaining: "noch %{remaining}"
+      remaining: "%{remaining} bis Bestellschluss"
       title: Laufende Bestellungen
+    order_details:
+      details: Details anzeigen
     update:
       error_general: Die Bestellung konnte nicht aktualisiert werden, da ein Fehler auftrat.
       error_stale: In der Zwischenzeit hat jemand anderes auch bestellt, daher konnte die Bestellung nicht aktualisiert werden.

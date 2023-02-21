@@ -1103,6 +1103,8 @@ en:
     switch_order:
       remaining: "%{remaining} until order closes"
       title: Current orders
+    order_details:
+        details: Show Details
     update:
       error_general: The order couldn’t be updated due to a bug.
       error_stale: Someone else has ordered in the meantime, couldn't update the order.

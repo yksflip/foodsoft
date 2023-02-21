@@ -1071,8 +1071,10 @@ nl:
       sum: Som
       title: Jouw bestelling voor %{order}
     switch_order:
-      remaining: "nog %{remaining}"
+      remaining: "%{remaining} tot bestelling sluit"
       title: Lopende bestellingen
+    order_details:
+      details: Bekijk details
     update:
       error_general: Er is een probleem opgetreden, de bestelling kon niet bijgewerkt worden.
       error_stale: In de tussentijd heeft iemand anders ook bestelt, daarom kon je bestelling niet opgeslagen worden. Sorry!
