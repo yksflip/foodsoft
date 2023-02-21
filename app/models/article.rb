@@ -51,7 +51,7 @@ class Article < ApplicationRecord
   has_many :orders, through: :order_articles
 
   # Replace numeric seperator with database format
-  localize_input_of :price, :tax, :deposit
+  localize_input_of :price, :tax, :deposit, :price_per
   # Get rid of unwanted whitespace. {Unit#new} may even bork on whitespace.
   normalize_attributes :name, :unit, :note, :manufacturer, :origin, :order_number
 
@@ -152,6 +152,7 @@ class Article < ApplicationRecord
         :price => [self.price.to_f.round(2), new_price.to_f.round(2)],
         :tax => [self.tax, new_article.tax],
         :deposit => [self.deposit.to_f.round(2), new_article.deposit.to_f.round(2)],
+        :price_per => [self.price_per.to_f.round(2), new_article.price_per.to_f.round(2)],
         # take care of different num-objects.
         :unit_quantity => [self.unit_quantity.to_s.to_f, new_unit_quantity.to_s.to_f],
         :note => [self.note.to_s, new_article.note.to_s]
