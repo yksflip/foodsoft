@@ -179,17 +179,13 @@ function updateBalance() {
     var balance = groupBalance - total;
     $('#new_balance').html(I18n.l("currency", balance));
     $('#total_balance').val(I18n.l("currency", balance));
-    // determine bgcolor and submit button state according to balance
-    var bgcolor = '';
     if (balance < minimumBalance) {
-        bgcolor = '#FF0000';
         $('#submit_button').attr('disabled', 'disabled')
+        $('#balance-alert').css('display', 'block')
+
     } else {
         $('#submit_button').removeAttr('disabled')
-    }
-    // update bgcolor
-    for (i in itemTotal) {
-        $('#td_price_' + i).css('background-color', bgcolor);
+        $('#balance-alert').css('display', 'none')
     }
 }
 

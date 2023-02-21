@@ -1,0 +1,28 @@
+%a(href='#tab1' data-toggle="collapse")
+  =t '.details'
+#tab1.collapse
+  %dl.dl-horizontal
+    - unless @order.note.blank?
+      %dt= heading_helper Order, :note
+      %dd= @order.note
+    %dt= heading_helper Order, :created_by
+    %dd= show_user_link(@order.created_by)
+    %dt= heading_helper Order, :ends
+    %dd= format_time(@order.ends)
+    %dt= heading_helper Order, :pickup
+    %dd= format_date(@order.pickup)
+    - unless @order.stockit? or @order.supplier.min_order_quantity.blank?
+      %dt= heading_helper Supplier, :min_order_quantity, short: true
+      %dd= @order.supplier.min_order_quantity
+    %dt= t 'group_orders.form.sum_amount'
+    %dd= number_to_currency @order.sum
+    - unless @group_order.new_record?
+      %dt= heading_helper GroupOrder, :updated_by
+      %dd
+        = show_user(@group_order.updated_by)
+        (#{format_time(@group_order.updated_on)})
+    %dt= heading_helper Ordergroup, :account_balance
+    %dd= number_to_currency(@ordering_data[:account_balance])
+    - unless FoodsoftConfig[:charge_members_manually]
+      %dt= heading_helper Ordergroup, :available_funds
+      %dd= number_to_currency(@ordering_data[:available_funds])

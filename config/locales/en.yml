@@ -1047,6 +1047,7 @@ en:
       error_stale: Someone else has ordered in the meantime, couldn't update the order.
       notice: The order was saved.
     errors:
+      balance_alert: Negative account balance
       closed: This order is already closed.
       no_member: You are not a member of an ordergroup.
       notfound: Incorrect URL, this is not your order.

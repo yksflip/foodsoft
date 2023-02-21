@@ -1045,6 +1045,7 @@ de:
       error_stale: In der Zwischenzeit hat jemand anderes auch bestellt, daher konnte die Bestellung nicht aktualisiert werden.
       notice: Die Bestellung wurde gespeichert.
     errors:
+      balance_alert: Kontostand im Minus
       closed: Diese Bestellung ist bereits abgeschlossen.
       no_member: Du bist kein Mitglieder einer Bestellgruppe.
       notfound: Fehlerhafte URL, das ist nicht Deine Bestellung.

@@ -1017,6 +1017,7 @@ nl:
       error_stale: In de tussentijd heeft iemand anders ook bestelt, daarom kon de bestelling niet bijgewerkt worden.
       notice: Bestelling opgeslagen.
     errors:
+      balance_alert: Accountsaldo in het rood
       closed: Deze bestelling is al gesloten.
       no_member: Je bent geen lid van dit huishouden.
       notfound: Foute URL, dit is niet jouw bestelling.
