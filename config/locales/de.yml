@@ -1049,6 +1049,19 @@ de:
       closed: Diese Bestellung ist bereits abgeschlossen.
       no_member: Du bist kein Mitglieder einer Bestellgruppe.
       notfound: Fehlerhafte URL, das ist nicht Deine Bestellung.
+    explanations:
+      package_fill_level: |
+        Gebindefüllstand
+      missing_none: |
+        Voll
+      missing_few: |
+        Wenig fehlt
+      missing_many: |
+        Viel fehlt
+      title: Erklärungen
+      tolerance_explained: |
+        Zusätzliche Menge die du bestellen würdest, damit das Gebinde voll wird.
+      tolerance: Toleranz
     form:
       action_save: Bestellung speichern
       new_funds: Neuer Kontostand

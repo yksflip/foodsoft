@@ -1051,6 +1051,19 @@ en:
       closed: This order is already closed.
       no_member: You are not a member of an ordergroup.
       notfound: Incorrect URL, this is not your order.
+    explanations:
+      title: Explanations
+      tolerance: Tolerance
+      package_fill_level: |
+        Package Fill Level
+      missing_none: |
+        No more missing
+      missing_few: |
+        Few missing
+      missing_many: |
+        Many missing
+      tolerance_explained: |
+        Additional amount you would buy to fill a wholesale package
     form:
       action_save: Save order
       new_funds: New account balance
