@@ -7,4 +7,4 @@
           data-toggle='tooltip'
           data-placement='bottom'
           title='#{ order.ends ? t('.remaining', remaining: time_ago_in_words(order.ends)) : "" }')
-        = link_to_ordering(order, 'data-confirm_switch_order' => true)
+        = link_to_ordering(order, show: true, 'data-confirm_switch_order' => true)
