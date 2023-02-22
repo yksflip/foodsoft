@@ -25,9 +25,12 @@
 .alert.alert-error#balance-alert{style: ('display:none')}
   =t 'group_orders.errors.balance_alert'
 .row-fluid
-  .well.span3
-    = render 'switch_order', current_order: @order
-  .well.span8
+  .span2
+    .well
+      = render 'switch_order', current_order: @order
+    .well
+      = render 'explanations'
+  .well.span9
     %h2= @order.name
     %a(href='#tab1' data-toggle="collapse")
       =t '.details'
@@ -82,10 +85,11 @@
                     %span{id: "missing_units_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:missing_units]
 
                 %td.quantity
-                  %input{id: "q_#{order_article.id}", name: "group_order[group_order_articles_attributes][#{order_article.id}][quantity]", type: "hidden", value: @ordering_data[:order_articles][order_article.id][:quantity], 'data-min' => (@ordering_data[:order_articles][order_article.id][:quantity] if @order.boxfill?), 'data-max' => (@ordering_data[:order_articles][order_article.id][:quantity]+@ordering_data[:order_articles][order_article.id][:missing_units] if @order.boxfill?)}/
-                  %span.used{id: "q_used_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:used_quantity]
-                  +
-                  %span.unused{id: "q_unused_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:quantity] - @ordering_data[:order_articles][order_article.id][:used_quantity]
+                  .outer{style: "diyplay: inline-block; float: left; width: 50px;"}
+                    %input{id: "q_#{order_article.id}", name: "group_order[group_order_articles_attributes][#{order_article.id}][quantity]", type: "hidden", value: @ordering_data[:order_articles][order_article.id][:quantity], 'data-min' => (@ordering_data[:order_articles][order_article.id][:quantity] if @order.boxfill?), 'data-max' => (@ordering_data[:order_articles][order_article.id][:quantity]+@ordering_data[:order_articles][order_article.id][:missing_units] if @order.boxfill?)}/
+                    %span.used{id: "q_used_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:used_quantity]
+                    +
+                    %span.unused{id: "q_unused_#{order_article.id}"}= @ordering_data[:order_articles][order_article.id][:quantity] - @ordering_data[:order_articles][order_article.id][:used_quantity]
                   .btn-group
                     %a.btn.btn-ordering{'data-decrease_quantity' => order_article.id}
                       %i.icon-minus
