@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   scope '/:foodcoop' do
-    get '/order/send_result_to_supplier_modal' => 'orders#send_result_to_supplier_modal'
+    get '/order/:id/send_result_to_supplier_modal', controller: 'orders', action: :send_result_to_supplier_modal, as: :order_send_result_to_supplier_modal
+    post '/order/:id/send_result_to_supplier', controller: 'orders', action: :send_result_to_supplier, as: :send_result_to_supplier
   end
 end

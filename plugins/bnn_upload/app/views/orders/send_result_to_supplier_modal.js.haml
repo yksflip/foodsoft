@@ -1,3 +1,3 @@
-$('#modalContainer').html('#{j(render("send_to_supplier_modal"))}');
+$('#modalContainer').html('#{escape_javascript(render("send_result_to_supplier_modal"))}');
 $('#modalContainer').modal();
 $('#modalContainer').submit(function() {$('#modalContainer').modal('hide');});
