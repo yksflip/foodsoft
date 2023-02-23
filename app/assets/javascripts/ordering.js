@@ -228,7 +228,7 @@ $(function() {
     });
     $('a[data-reorder_previous]').on('touchclick', function() {
         console.log('reorder_previous');
-        update($(this).data('reorder_previous'), $(this).data('quantity'), $(this).data('tolerance'));
+        // update($(this).data('reorder_previous'), $(this).data('quantity'), $(this).data('tolerance'));
     });
     
     $('a[data-confirm_switch_order]').on('touchclick', function() {
