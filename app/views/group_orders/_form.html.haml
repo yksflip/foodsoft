@@ -31,11 +31,21 @@
     .well
       = render 'explanations'
   .well.span9
-    %h2= t '.sub_title', order_name: @order.name
-    %a(href='#tab1' data-toggle="collapse")
-      =t '.details'
-    #tab1.collapse
-      = render 'order_details'
+    %h2.span9= t '.sub_title', order_name: @order.name
+    .span3
+      %table.table-condensed
+        -if @order.ends
+          %tr
+            %td= heading_helper(Order, :ends) + ': '
+            %td= format_time(@order.ends)
+        - unless @order.stockit? or @order.supplier.min_order_quantity.blank?
+          %tr
+            %td= heading_helper(Supplier, :min_order_quantity)
+            %td= number_to_currency(@order.supplier.min_order_quantity)
+        %tr
+          %td= t('group_orders.form.sum_amount') + ':'
+          %td= number_to_currency(@order.sum)
+      %hr
     .form-search.pull-right
       .input-append
         = text_field_tag :article, params[:article], placeholder: t('.search_article'), class: 'search-query delayed-search resettable'
