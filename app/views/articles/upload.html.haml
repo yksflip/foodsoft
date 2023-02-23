@@ -81,6 +81,9 @@
     =f.collection_select :type, ["bnn","foodsoft","odin"], :to_s, :to_s
 
   .control-group
+    %label(for="articles_update_category")
+      = f.check_box "update_category"
+      = t '.options.update_category'
     %label(for="articles_outlist_absent")
       = f.check_box "outlist_absent"
       = t '.options.outlist_absent'
