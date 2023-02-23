@@ -1072,6 +1072,7 @@ en:
       search_article: Search for articles...
       sum_amount: Current amount
       title: Orders
+      sub_title: Place order for %{order_name}
       total_sum_amount: Total amount
       total_tolerance: Total tolerance
       units: Units

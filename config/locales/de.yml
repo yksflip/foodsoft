@@ -1070,6 +1070,7 @@ de:
       search_article: Artikel suchen...
       sum_amount: Gesamtbestellmenge bisher
       title: Bestellen
+      sub_title: Bestellung für %{order_name} aufgeben
       total_sum_amount: Gesamtbetrag
       total_tolerance: Gesamt-Toleranz
       units: Gebinde

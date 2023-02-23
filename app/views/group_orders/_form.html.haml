@@ -31,7 +31,7 @@
     .well
       = render 'explanations'
   .well.span9
-    %h2= @order.name
+    %h2= t '.sub_title', order_name: @order.name
     %a(href='#tab1' data-toggle="collapse")
       =t '.details'
     #tab1.collapse

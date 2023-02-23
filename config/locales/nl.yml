@@ -1029,6 +1029,7 @@ nl:
       search_article: Artikelen zoeken...
       sum_amount: Huidig totaalbedrag
       title: Bestellen
+      sub_title: Plaats bestelling voor %{order_name}
       total_sum_amount: Totalbedrag
       total_tolerance: Totale tolerantie
       units: Eenheden
