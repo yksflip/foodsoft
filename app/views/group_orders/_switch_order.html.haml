@@ -2,9 +2,9 @@
 - unless orders.empty?
   %ul.nav.nav-pills.nav-stacked
     .nav-header= t '.title'
+    %li= link_to t('ui.overview'), :group_orders
     - orders.each do |order|
-      %li( class='#{ order == current_order ? "active" : ""}'
-          data-toggle='tooltip'
-          data-placement='bottom'
-          title='#{ order.ends ? t('.remaining', remaining: time_ago_in_words(order.ends)) : "" }')
-        = link_to_ordering(order, show: true, 'data-confirm_switch_order' => true)
+      .btn-small.pull-right
+        =link_to_ordering(order, style: (order == current_order ? 'color: white' : '' ), 'data-confirm_switch_order' => true){ t 'ui.edit' }
+      %li( class="#{ order == current_order ? 'active' : ''}")
+        =link_to_ordering(order, show: true, 'data-confirm_switch_order' => true)
