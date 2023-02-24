@@ -142,14 +142,6 @@ class Article < ApplicationRecord
       new_unit_quantity = new_article.unit_quantity
       new_unit = new_article.unit
     end
-    puts "
-    " + "______________" + "
-    " + "______________" + "
-    " + "_____oha_________" + "
-    " + "#{new_article.unit_symbol}" + "
-    " + "______________"+ "
-    " + "______________"+ "
-    " + "______________"
     return Article.compare_attributes(
       {
         :name => [self.name, new_article.name],
