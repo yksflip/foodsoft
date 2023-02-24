@@ -1,65 +1,124 @@
 Foodsoft
 =========
-[![Build Status](https://github.com/foodcoops/foodsoft/workflows/Ruby/badge.svg)](https://github.com/foodcoops/foodsoft/actions)
-[![Coverage Status](https://coveralls.io/repos/foodcoops/foodsoft/badge.svg?branch=master)](https://coveralls.io/r/foodcoops/foodsoft?branch=master)
-[![Docs Status](https://inch-ci.org/github/foodcoops/foodsoft.svg?branch=master)](http://inch-ci.org/github/foodcoops/foodsoft)
-[![Code Climate](https://codeclimate.com/github/foodcoops/foodsoft.svg)](https://codeclimate.com/github/foodcoops/foodsoft)
-[![Docker Status](https://img.shields.io/docker/cloud/build/foodcoops/foodsoft.svg)](https://hub.docker.com/r/foodcoops/foodsoft)
-[![Documentation](https://img.shields.io/badge/yard-docs-blue.svg)](http://rubydoc.info/github/foodcoops/foodsoft)
 
-Web-based software to manage a non-profit food coop (product catalog, ordering, accounting, job scheduling).
-
-A food cooperative is a group of people that buy food from suppliers of their own choosing. A collective do-it-yourself supermarket. Members  order their products online and collect them on a specified day. And all put in a bit of work to make that possible. Foodsoft facilitates the process.
-
-If you're a food coop considering to use foodsoft, please have a look at the [wiki page for foodcoops](https://github.com/foodcoops/foodsoft/wiki/For-foodcoops). When you'd like to experiment with or develop foodsoft, you can read [how to set it up](https://github.com/foodcoops/foodsoft/blob/master/doc/SETUP_DEVELOPMENT.md) on your own computer.
-
-More information about using this software and contributing can be found on the [wiki](https://github.com/foodcoops/foodsoft/wiki).
+[Website](https://foodsoft.local-it.org)  
+[Prototypefund](https://prototypefund.de/project/weiterentwicklung-von-foodsoft/)
 
 
-Developing
-----------
+Foodsoft ist ein Tool für [Lebensmittelkooperativen](https://de.wikipedia.org/wiki/Lebensmittelkooperative), welches selbstorganisierte gemeinsame Bestellungen in Großmengen von regionalen und ökologischen Produkten vereinfacht und transparent gestaltet.
 
-Get foodsoft [running locally](doc/SETUP_DEVELOPMENT.md),
-then visit our [Developing Guidelines](https://github.com/foodcoops/foodsoft/wiki/Developing-Guidelines)
-page on the wiki.
-
-Get a foodsoft dev-environment running in the browser with Gitpod
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/foodcoops/foodsoft)
-
-Follow these [instructions](doc/SETUP_DEVELOPMENT_GITPOD.md) to complete setup from within the Gitpod workspace. 
-
-Deploying
----------
-
-Setup foodsoft to [run in production](doc/SETUP_PRODUCTION.md), or join an existing
-[hosting platform](https://foodcoops.net/foodsoft-hosting/).
+Foodsoft wurde ursprünglich entwickelt und betrieben von [foodcoops.net](https://foodcoops.net/)
 
 
-License
--------
+#### Zielgruppe
 
-Foodsoft is licensed under the [AGPL](https://www.gnu.org/licenses/agpl-3.0.html)
-license (version 3 or later). Practically this means that you are free to use,
-adapt and redistribute the software, as long as you publish any changes you
-make to the code.
+Unsere Zielgruppen sind Bürger:innen, Gruppen und Vereine, die eine Einkauskooperative aufbauen wollen und eine Software, die die Bestellung, Verteilung und Abrechnung erleichtert, benötigen.
 
-For private use, there are no restrictions, but if you give others access to
-Foodsoft (like running it open to the internet), you must also make your
-changes available under the same license. This can be as easy as
-[forking](https://github.com/foodcoops/foodsoft/fork) the project on Github and
-pushing your changes. You are not required to integrate your changes back into
-the main Foodsoft version (but if you're up for it that would be very welcome).
+#### Vorhaben 
 
-To make it a little easier, configuration files are exempt, so you can just
-install and configure Foodsoft without having to publish your changes. These
-files are marked as public domain in the file header.
+* ✅  Technische Schuld reduzieren
+* ✅  Ruby on Rails Upgrade
+* ✅  Artikel Import verbessern
+      (Großhandelschnitstelle)
+* ✅ Userexperience Verbessern
 
-If you have any remaining questions, please
-[open an issue](https://github.com/foodcoops/foodsoft/issues/new) or open a new
-topic at the [forum](https://forum.foodcoops.net).
+#### Was ist eine Einkaufskooperative?
 
-Please see [LICENSE](LICENSE.md) for the full and authoritative text. Some
-bundled third-party components have [other licenses](vendor/README.md).
+![Wie funktioniert eine Einkauskooperative?](./doc/foodcoop-explained.jpg)
 
-Thanks to [Icons8](http://icons8.com/) for letting us use their icons.
+
+
+State of this Fork
+------------------
+
+#### Increase Test Coverage
+
+1. integration and model tests
+    * [x] fork
+    * [x] upstream [#966](https://github.com/foodcoops/foodsoft/pull/966)
+1. Controller tests
+    * [x] [fork](https://git.local-it.org/Foodsoft/foodsoft/src/branch/8_increase_test_coverage_controllers)
+    * [ ] upstream [#970](https://github.com/foodcoops/foodsoft/pull/970)
+
+#### Upgrade
+
+1. Migrate to RSwag API Tests
+    * [x] [fork](https://git.local-it.org/Foodsoft/foodsoft/src/branch/28_introduce_rswag)
+    * [ ] upstream [#969](https://github.com/foodcoops/foodsoft/pull/969)
+1. Rails v7
+    * [x] [fork](https://git.local-it.org/Foodsoft/foodsoft/src/branch/9_rails_v_7)
+    * [ ] upstream [#979](https://github.com/foodcoops/foodsoft/pull/979)
+          disussion [#956](https://github.com/foodcoops/foodsoft/issues/956)
+1. Javascript Importmap
+    * [x] [fork](https://git.local-it.org/Foodsoft/foodsoft/src/branch/9_rails_v_7_js_importmap)
+    * [ ] upstream
+
+#### Article Order Import/Export
+
+Updating Articles from large resellers and exporting orders is now much easier!
+
+1. adds bnn fileformat that is used from large german resellers e.g. naturkost nord
+    * [x] [fork](https://git.local-it.org/Foodsoft/foodsoft/src/branch/11_bnn_import_article_update)  
+          [gem](https://git.local-it.org/Foodsoft/foodsoft_article_import)
+    * [ ] upstream  
+1. Import category field
+    * [x] [fork](https://git.local-it.org/Foodsoft/foodsoft/src/branch/56_add_update_of_article_category_to_file_import)
+    * [ ] upstream
+1. Export order as a custom csv file
+    * [x] [fork](https://git.local-it.org/Foodsoft/foodsoft/src/branch/12_generate_custom_csv_file)
+    * [ ] upstream  
+1. Naturkostnord Plugin
+    * [ ] [fork](https://git.local-it.org/Foodsoft/foodsoft/src/branch/12_nkn_file_plugin)
+    * [ ] upstream
+
+#### Improve User Experience
+
+1. Richtext editor for messages. Also allows sending attachements.
+    * [x] [fork](https://git.local-it.org/Foodsoft/foodsoft/src/branch/16_html_message_templates)
+    * [ ] upstream  
+1. Show the sum of all order group balances
+    * [x] [fork](https://git.local-it.org/Foodsoft/foodsoft/src/branch/47_finance_ordergroup_sums)
+    * [ ] upstream  
+1. UI improvements for group order view
+    * [x] [fork](https://git.local-it.org/Foodsoft/foodsoft/src/branch/uxui_group_order)
+    * [ ] upstream
+1. Favorites
+    * [ ] [fork](https://git.local-it.org/Foodsoft/foodsoft/src/branch/20_favourites)
+    * [ ] upstream
+1. Show the per kilo / litre price
+    * [x] [fork](https://git.local-it.org/Foodsoft/foodsoft/src/branch/11_include_kilo_litre_price)
+    * [ ] upstream
+
+#### Other
+
+1. Fix broken plugin mechanism
+    * [x] [fork](https://git.local-it.org/Foodsoft/foodsoft/src/branch/downgrade-haml)
+    * [ ] upstream
+
+#### Screenshots
+
+![rswag](./doc/screenshots/rswag.png)
+
+---
+
+![bnn upload](./doc/screenshots/bnn_upload.png)
+
+---
+
+![message formatting](./doc/screenshots/message_formatting.png)
+
+---
+
+![balance sum](./doc/screenshots/balance_sum.png)
+
+---
+
+![custom csv export](./doc/screenshots/custom_csv_export.png)
+csv export
+
+---
+
+![order](./doc/screenshots/order.png)
+
+
+
