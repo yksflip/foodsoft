@@ -81,7 +81,7 @@ class Supplier < ApplicationRecord
     all_order_numbers = []
     updated_article_pairs, outlisted_articles, new_articles = [], [], []
     custom_codes_path = File.join(Rails.root, "config", "custom_codes.yml")
-    opts = options.except(:convert_units, :outlist_absent)
+    opts = options.except(:convert_units, :outlist_absent, :update_category)
     custom_codes_file_path = custom_codes_path if File.exist?(custom_codes_path)
     FoodsoftArticleImport.parse(file, custom_file_path: custom_codes_file_path, type: type, **opts) do |new_attrs, status, line|
       article = articles.undeleted.where(order_number: new_attrs[:order_number]).first
