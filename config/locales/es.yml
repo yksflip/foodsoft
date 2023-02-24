@@ -930,6 +930,7 @@ es:
       action_save: Guardar pedido
       new_funds: Nuevo balance de cuenta
       price: Precio
+      price_per_base_unit: Precio de base
       reset_article_search: Reinicia la búsqueda
       search_article: Busca artículos...
       sum_amount: Cantidad actual

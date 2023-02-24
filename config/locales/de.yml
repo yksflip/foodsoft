@@ -1067,6 +1067,7 @@ de:
       action_save: Bestellung speichern
       new_funds: Neuer Kontostand
       price: Preis
+      price_per_base_unit: Grundpreis
       reset_article_search: Suche zurücksetzen
       search_article: Artikel suchen...
       sum_amount: Gesamtbestellmenge bisher

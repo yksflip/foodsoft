@@ -53,4 +53,12 @@ module GroupOrdersHelper
       return 'missing-many'
     end
   end
+
+  def price_per_base_unit(article:, price:)
+    quantity_unit = QuantityUnit.parse(article.unit)
+    return nil unless quantity_unit.present?
+
+    scaled_price, base_unit = quantity_unit.scale_price_to_base_unit(price)
+    "#{number_to_currency(scaled_price)}/#{base_unit}"
+  end
 end
