@@ -1024,6 +1024,7 @@ nl:
       action_save: Bestelling opslaan
       new_funds: Nieuw tegoed
       price: Prijs
+      price_per_base_unit: Basisprjis
       reset_article_search: Alles tonen
       search_article: Artikelen zoeken...
       sum_amount: Huidig totaalbedrag
