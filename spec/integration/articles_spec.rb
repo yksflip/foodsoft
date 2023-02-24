@@ -8,7 +8,10 @@ feature ArticlesController do
   before { login user }
 
   describe ':index', js: true do
-    before { visit supplier_articles_path(supplier_id: supplier.id) }
+    before {
+      login user
+      visit supplier_articles_path(supplier_id: supplier.id)
+    }
 
     it 'can visit supplier articles path' do
       expect(page).to have_content(supplier.name)
