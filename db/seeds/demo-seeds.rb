@@ -58,7 +58,7 @@ Article.create!(
   origin: "D", price: 3.49, tax: 7.0,
   unit: "200g", unit_quantity: 5, 
   note: "bio, fairtrade, 40% Kakao, vegan",
-  availability: true, order_number: "1")
+  availability: true, order_number: "2")
   
 dark_chocolate = Article.create!(
   name: "Dunkle Schokolade",
@@ -68,7 +68,7 @@ dark_chocolate = Article.create!(
   origin: "D", price: 2.89, tax: 7.0,
   unit: "200g", unit_quantity: 5, 
   note: "bio, fairtrade, 40% Kakao, vegan",
-  availability: true, order_number: "1")
+  availability: true, order_number: "3")
 
 Article.create!(
   name: "Himbeer-Schokolade",
@@ -78,7 +78,7 @@ Article.create!(
   origin: "D", price: 2.89, tax: 7.0,
   unit: "170g", unit_quantity: 4, 
   note: "bio, fairtrade, 40% Kakao, vegan",
-  availability: true, order_number: "1")
+  availability: true, order_number: "4")
 
 previous_order = seed_order(supplier_id: chocolate_supplier.id, starts: 10.days.ago, ends: 7.days.ago)
 
@@ -90,4 +90,55 @@ GroupOrderArticle.create!(
 previous_order.close!(alice)
 
 seed_order(supplier_id: chocolate_supplier.id, starts: 0.days.ago, ends: 7.days.from_now)
+
+
+apple = Article.create!(
+  name: "Äpfel Elstar",
+  supplier_id: nkn_supplier.id,
+  article_category_id: supplier_category.id,
+  manufacturer: "Obsthof Bruno Brugger",
+  origin: "D", price: 3.49, tax: 7.0,
+  unit: "1kg", unit_quantity: 10, 
+  note: "lecker, fruchtig, demeter",
+  availability: true, order_number: "5")
+  
+brokkoli = Article.create!(
+  name: "Brokkoli",
+  supplier_id: nkn_supplier.id,
+  article_category_id: supplier_category.id,
+  manufacturer: "Fattoria degli Orsi",
+  origin: "IT", price: 2.89, tax: 7.0,
+  unit: "400g", unit_quantity: 6,
+  note: "gesund und lecker",
+  availability: true, order_number: "6")
+
+tomatoes = Article.create!(
+  name: "Tomaten",
+  supplier_id: nkn_supplier.id,
+  article_category_id: supplier_category.id,
+  manufacturer: "Terra di Puglia",
+  origin: "IT", price: 2.89, tax: 7.0,
+  unit: "500g", unit_quantity: 20, 
+  note: "pomodori italianio, demeter",
+  availability: true, order_number: "7")
+
+rice = Article.create!(
+  name: "Reis",
+  supplier_id: nkn_supplier.id,
+  article_category_id: supplier_category.id,
+  manufacturer: "Finck",
+  origin: "D", price: 3.29, tax: 7.0,
+  unit: "3kg", unit_quantity: 10, 
+  note: "Reis im Vorratssack, demeter",
+  availability: true, order_number: "8")
+
+spaghetti = Article.create!(
+  name: "Spaghetti",
+  supplier_id: nkn_supplier.id,
+  article_category_id: supplier_category.id,
+  manufacturer: "Pastificio Zanellini spa",
+  origin: "D", price: 2.89, tax: 7.0,
+  unit: "500g", unit_quantity: 4, 
+  note: "100% italienisches Hartweizengrieß",
+  availability: true, order_number: "9")
 
