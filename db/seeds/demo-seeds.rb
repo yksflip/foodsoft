@@ -122,7 +122,7 @@ tomatoes = Article.create!(
   manufacturer: "Terra di Puglia",
   origin: "IT", price: 2.89, tax: 7.0,
   unit: "500g", unit_quantity: 20, 
-  note: "pomodori italianio, demeter",
+  note: "pomodori italiani, demeter",
   availability: true, order_number: "7")
 
 rice = Article.create!(
