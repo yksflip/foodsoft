@@ -1,0 +1,190 @@
+---
+version: "3.8"
+
+x-env: &env
+  CERTBOT_DISABLED: 1
+  DOMAIN:
+  EMAIL_ERROR:
+  EMAIL_REPLY_DOMAIN:
+  EMAIL_SENDER:
+  FOODCOOP_CITY:
+  FOODCOOP_COUNTRY:
+  FOODCOOP_EMAIL:
+  FOODCOOP_FOOTER:
+  FOODCOOP_HELP_URL:
+  FOODCOOP_HOMEPAGE:
+  FOODCOOP_MULTI_INSTALL:
+  FOODCOOP_NAME:
+  FOODCOOP_PHONE:
+  FOODCOOP_STREET:
+  FOODCOOP_TIME_ZONE:
+  FOODCOOP_ZIP_CODE:
+  FOODCOOP_USE_NICK:
+  FOODCOOP_LANGUAGE:
+  LOG_LEVEL:
+  MINIMUM_BALANCE:
+  MYSQL_DB:
+  MYSQL_HOST:
+  MYSQL_PORT:
+  MYSQL_USER:
+  QUEUE: foodsoft_notifier
+  REDIS_URL: redis://cache:6379
+  SECRET_KEY_BASE_FILE: /run/secrets/secret_key_base
+  SMTP_ADDRESS:
+  SMTP_AUTHENTICATION:
+  SMTP_DOMAIN:
+  SMTP_ENABLE_STARTTLS_AUTO:
+  SMTP_PASSWORD_FILE: /run/secrets/smtp_password
+  SMTP_PORT:
+  SMTP_USER_NAME:
+  STOP_ORDERING_UNDER:
+  USE_APPLE_POINTS:
+
+x-configs: &configs
+  - source: app_config
+    target: /usr/src/app/config/app_config.yml
+  - source: db_config
+    target: /usr/src/app/config/database.yml
+  - source: entrypoint
+    target: /usr/src/app/docker-entrypoint.sh
+    mode: 0555
+
+x-secrets: &secrets
+  - db_password
+  - secret_key_base
+  - smtp_password
+
+services:
+  app:
+    image: ${IMAGE}
+    networks:
+      - internal
+      - proxy
+    secrets: *secrets
+    configs: *configs
+    entrypoint: &entrypoint /usr/src/app/docker-entrypoint.sh
+    environment:
+      <<: *env
+      FOODSOFT_SERVICE: app
+      RAILS_SERVE_STATIC_FILES: 'true'
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+      start_period: 1m
+    deploy:
+      update_config:
+        failure_action: rollback
+        order: start-first
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.${STACK_NAME}.rule=Host(`${DOMAIN}`${EXTRA_DOMAINS})"
+        - "traefik.http.routers.${STACK_NAME}.entrypoints=web-secure"
+        - "traefik.http.routers.${STACK_NAME}.tls.certresolver=${LETS_ENCRYPT_ENV}"
+        - "traefik.http.services.${STACK_NAME}.loadbalancer.server.port=3000"
+        - "coop-cloud.${STACK_NAME}.version=1.0.0+4.7.1"
+
+  cron:
+    image: ${IMAGE}
+    secrets: *secrets
+    configs: *configs
+    entrypoint: *entrypoint
+    environment:
+      <<: *env
+      FOODSOFT_SERVICE: cron
+    networks:
+      - internal
+
+  worker:
+    image: ${IMAGE}
+    secrets: *secrets
+    configs: *configs
+    entrypoint: *entrypoint
+    environment:
+      <<: *env
+      FOODSOFT_SERVICE: worker
+    networks:
+      - internal
+
+  smtp:
+    image: ${IMAGE}
+    configs: *configs
+    entrypoint: *entrypoint
+    secrets: *secrets
+    environment:
+      <<: *env
+      FOODSOFT_SERVICE: smtp
+      SMTP_SERVER_HOST:
+      SMTP_SERVER_PORT:
+    networks:
+      - proxy
+      - internal
+    deploy:
+      labels:
+        - "traefik.enable=true"
+        - "traefik.tcp.routers.foodsoft-smtp.rule=HostSNI(`*`)"
+        - "traefik.tcp.routers.foodsoft-smtp.entrypoints=foodsoft-smtp"
+        - "traefik.tcp.services.foodsoft-smtp.loadbalancer.server.port=${SMTP_SERVER_PORT}"
+
+  db:
+    image: "mariadb:10.6"
+    command: "mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_520_ci"
+    environment:
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_DATABASE: ${MYSQL_DB}
+      MYSQL_PASSWORD_FILE: /run/secrets/db_password
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+    secrets:
+      - db_password
+      - db_root_password
+    volumes:
+      - "db:/var/lib/mysql"
+    networks:
+      - internal
+    deploy:
+      labels:
+          backupbot.backup: "true"
+          backupbot.backup.pre-hook: 'mkdir -p /tmp/backup/ && mysqldump --single-transaction -u root -p"$$(cat /run/secrets/db_root_password)" $${MYSQL_DATABASE} > /tmp/backup/backup.sql'
+          backupbot.backup.post-hook: "rm -rf /tmp/backup"
+          backupbot.backup.path: "/tmp/backup/"
+  cache:
+    image: "redis:6"
+    networks:
+      - internal
+
+networks:
+  internal:
+  proxy:
+    external: true
+
+volumes:
+  db:
+
+configs:
+  app_config:
+    name: ${STACK_NAME}_app_config_${APP_CONFIG_VERSION}
+    file: app_config.yml.tmpl
+    template_driver: golang
+  db_config:
+    name: ${STACK_NAME}_db_config_${DB_CONFIG_VERSION}
+    file: database.yml.tmpl
+    template_driver: golang
+  entrypoint:
+    name: ${STACK_NAME}_entrypoint_${ENTRYPOINT_VERSION}
+    file: entrypoint.sh.tmpl
+    template_driver: golang
+
+secrets:
+  db_password:
+    name: ${STACK_NAME}_db_password_${SECRET_DB_PASSWORD_VERSION}
+    external: true
+  db_root_password:
+    name: ${STACK_NAME}_db_root_password_${SECRET_DB_ROOT_PASSWORD_VERSION}
+    external: true
+  smtp_password:
+    name: ${STACK_NAME}_smtp_password_${SECRET_SMTP_PASSWORD_VERSION}
+    external: true
+  secret_key_base:
+    name: ${STACK_NAME}_secret_key_base_${SECRET_SECRET_KEY_BASE_VERSION}
+    external: true
