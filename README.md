@@ -44,10 +44,10 @@ State of this Fork
 
 1. Migrate to RSwag API Tests
     * [x] [fork](https://git.local-it.org/Foodsoft/foodsoft/src/branch/28_introduce_rswag)
-    * [ ] upstream [#969](https://github.com/foodcoops/foodsoft/pull/969)
+    * [x] upstream [#969](https://github.com/foodcoops/foodsoft/pull/969)
 1. Rails v7
     * [x] [fork](https://git.local-it.org/Foodsoft/foodsoft/src/branch/9_rails_v_7)
-    * [ ] upstream [#979](https://github.com/foodcoops/foodsoft/pull/979)
+    * [x] upstream [#979](https://github.com/foodcoops/foodsoft/pull/979)
           disussion [#956](https://github.com/foodcoops/foodsoft/issues/956)
 1. Javascript Importmap
     * [x] [fork](https://git.local-it.org/Foodsoft/foodsoft/src/branch/9_rails_v_7_js_importmap)
@@ -93,7 +93,7 @@ Updating Articles from large resellers and exporting orders is now much easier!
 
 1. Fix broken plugin mechanism
     * [x] [fork](https://git.local-it.org/Foodsoft/foodsoft/src/branch/downgrade-haml)
-    * [ ] upstream
+    * [x] upstream
 
 #### Screenshots
 
